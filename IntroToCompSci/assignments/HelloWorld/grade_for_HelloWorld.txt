@@ -1,0 +1,10 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Wed Sep  4 19:27:59 EDT 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/HelloWorld.java was on: Tue Sep 3 22:12:26 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Hello World!
+The world stands on 3 pillars
+Not 2.52 pillars
+and ... this is a very true statement

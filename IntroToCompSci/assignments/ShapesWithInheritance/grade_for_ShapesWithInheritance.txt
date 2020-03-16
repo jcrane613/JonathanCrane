@@ -1,0 +1,117 @@
+Grade for assignment [CraneJonathan]: 9/10
+Only took off a point for the set of identical errors (see requirements doc).
+
+
+
+Pulled files on Wed Dec 11 09:12:55 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/Triangle.java was on: Tue Dec 10 23:59:51 2019
+Latest commit of src/main/java/edu/yu/intro/Shapes.java was on: 
+Latest commit of src/main/java/edu/yu/intro/Circle.java was on: Tue Dec 10 23:59:29 2019
+Latest commit of src/main/java/edu/yu/intro/Rectangle.java was on: Wed Dec 11 00:00:08 2019
+Latest commit of src/main/java/edu/yu/intro/Shape.java was on: 
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 2
+Running edu.yu.intro.test.ShapesWithInheritanceTest
+Execution Started : RectangleArea
+Execution Finished : RectangleArea
+Execution Started : TriangleNegativeFirst
+Execution Finished : TriangleNegativeFirst
+Execution Started : RectanglePerimeter
+Execution Finished : RectanglePerimeter
+Execution Started : TrianglePerimeter
+Execution Finished : TrianglePerimeter
+Execution Started : CircleInvalid
+Execution Finished : CircleInvalid
+Execution Started : RectangleNegativeWidth
+Execution Finished : RectangleNegativeWidth
+Execution Started : TriangleArea
+Execution Finished : TriangleArea
+Execution Started : CirclePerimeter
+Execution Finished : CirclePerimeter
+Execution Started : CircleArea
+Execution Finished : CircleArea
+Execution Started : RectangleNegativeHeight
+Execution Finished : RectangleNegativeHeight
+Execution Started : TriangleNegativeLast
+Execution Finished : TriangleNegativeLast
+Execution Started : TriangleNegativeSecond
+Execution Finished : TriangleNegativeSecond
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 sec - in edu.yu.intro.test.ShapesWithInheritanceTest
+Running edu.yu.intro.test.ProfessorShapesTest
+Execution Started : testTriangle
+Execution Finished : testTriangle
+Execution Started : circleRadiusMustBePositive
+Execution Failure : java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+Execution Finished : circleRadiusMustBePositive
+Execution Started : rectangleHeightMustBePositive
+Execution Failure : java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+Execution Finished : rectangleHeightMustBePositive
+Execution Started : triangleS3MustBePositive
+Execution Failure : java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+Execution Finished : triangleS3MustBePositive
+Execution Started : rectangleWidthMustBePositive
+Execution Failure : java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+Execution Finished : rectangleWidthMustBePositive
+Execution Started : triangleS1MustBePositive
+Execution Failure : java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+Execution Finished : triangleS1MustBePositive
+Execution Started : shapeIsNotAnInterface
+Execution Finished : shapeIsNotAnInterface
+Execution Started : testCircle
+Execution Finished : testCircle
+Execution Started : testRectangle
+Execution Finished : testRectangle
+Execution Started : triangleS2MustBePositive
+Execution Failure : java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+Execution Finished : triangleS2MustBePositive
+Tests run: 10, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE! - in edu.yu.intro.test.ProfessorShapesTest
+circleRadiusMustBePositive(edu.yu.intro.test.ProfessorShapesTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+
+rectangleHeightMustBePositive(edu.yu.intro.test.ProfessorShapesTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+
+triangleS3MustBePositive(edu.yu.intro.test.ProfessorShapesTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+
+rectangleWidthMustBePositive(edu.yu.intro.test.ProfessorShapesTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+
+triangleS1MustBePositive(edu.yu.intro.test.ProfessorShapesTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+
+triangleS2MustBePositive(edu.yu.intro.test.ProfessorShapesTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected exception: java.lang.RuntimeException
+
+Test cases executed : 22
+
+Results :
+
+Failed tests: 
+  ProfessorShapesTest.circleRadiusMustBePositive Expected exception: java.lang.RuntimeException
+  ProfessorShapesTest.rectangleHeightMustBePositive Expected exception: java.lang.RuntimeException
+  ProfessorShapesTest.rectangleWidthMustBePositive Expected exception: java.lang.RuntimeException
+  ProfessorShapesTest.triangleS1MustBePositive Expected exception: java.lang.RuntimeException
+  ProfessorShapesTest.triangleS2MustBePositive Expected exception: java.lang.RuntimeException
+  ProfessorShapesTest.triangleS3MustBePositive Expected exception: java.lang.RuntimeException
+
+Tests run: 22, Failures: 6, Errors: 0, Skipped: 0
+
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19.1:test (default-test) on project ShapesWithInheritance: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/ShapesWithInheritance/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Problem invoking 'maven test target': aborting this run

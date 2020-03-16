@@ -1,0 +1,15 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Fri Sep 27 09:08:11 EDT 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/ShareSameBirthday.java was on: Fri Sep 27 00:44:42 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+*************************************************
+Number of experiments run: 10,000
+(For popualation size 10): simulated 'shared birthday'
+    frequency is  0.116
+(For popualation size 23): simulated 'shared birthday'
+    frequency is  0.500
+(For popualation size 70): simulated 'shared birthday'
+    frequency is  0.999
+*************************************************

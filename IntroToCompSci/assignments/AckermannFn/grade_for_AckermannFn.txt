@@ -1,0 +1,60 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Wed Nov  6 08:42:32 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/AckermannFn.java was on: Sun Nov 3 15:17:57 2019
+building Student CraneJonathan assignment code base from directory /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/AckermannFn
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Copying Professor's JUnit source files in /Users/avraham/teaching/IntroToCompSci/assignments/AckermannFn/src/test to Student CraneJonathan directory tree in /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/AckermannFn/src
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 2
+Running edu.yu.intro.methods.test.ProfessorAckermannTest
+Execution Started : test0_0
+Execution Finished : test0_0
+Execution Started : test0_4
+Execution Finished : test0_4
+Execution Started : test2_1
+Execution Finished : test2_1
+Execution Started : test2_4
+Execution Finished : test2_4
+Execution Started : test3_2
+Execution Finished : test3_2
+Execution Started : test3_3
+Execution Finished : test3_3
+Execution Started : test4_0
+Execution Finished : test4_0
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec - in edu.yu.intro.methods.test.ProfessorAckermannTest
+Running edu.yu.intro.test.AckermannFnTest
+Execution Started : ackermann00
+Execution Finished : ackermann00
+Execution Started : ackermann03
+Execution Finished : ackermann03
+Execution Started : ackermann11
+Execution Finished : ackermann11
+Execution Started : ackermann12
+Execution Finished : ackermann12
+Execution Started : ackermann13
+Execution Finished : ackermann13
+Execution Started : ackermann21
+Execution Finished : ackermann21
+Execution Started : ackermann22
+Execution Finished : ackermann22
+Execution Started : ackermann23
+Execution Finished : ackermann23
+Execution Started : ackermann30
+Execution Finished : ackermann30
+Execution Started : ackermann31
+Execution Finished : ackermann31
+Execution Started : ackermann32
+Execution Finished : ackermann32
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in edu.yu.intro.test.AckermannFnTest
+Test cases executed : 18
+
+Results :
+
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0
+

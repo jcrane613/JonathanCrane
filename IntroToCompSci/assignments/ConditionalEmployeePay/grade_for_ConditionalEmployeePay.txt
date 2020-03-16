@@ -1,0 +1,44 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Wed Sep 18 10:32:11 EDT 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/ConditionalEmployeePay.java was on: Mon Sep 16 17:53:53 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+
+"x-2384" 40.0 20.0 40
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Enter employeeId, hrsWorked, wageRate, deductions: Error: Check the deductions value
+
+
+"x-2384" 0.8 20.0 10
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Enter employeeId, hrsWorked, wageRate, deductions: Error: Check the amount of hours recorded
+
+
+"x-2384" 1.0 15.0 30
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Enter employeeId, hrsWorked, wageRate, deductions: Error: You entered a negative number for NetPay, which was -18.0
+
+
+"x-2384" 40.0 14.0 10
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Enter employeeId, hrsWorked, wageRate, deductions: Error: Check the value of wages per hour 
+
+
+"x-2384" 40.0 20.0 10
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Enter employeeId, hrsWorked, wageRate, deductions: *************************************************
+INPUT...
+Employee Id:         "x-2384"
+Hours Worked:        40.00
+Wage Rate:           20.00
+Deductions:          10
+
+
+
+OUTPUT...
+Gross Pay:           800.00
+Taxes:               120.00
+Net Pay:             630.00
+Average Pay:         15.75
+*************************************************

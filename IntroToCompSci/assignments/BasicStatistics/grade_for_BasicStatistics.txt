@@ -1,0 +1,71 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Wed Nov 20 08:38:54 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/BasicStatistics.java was on: Tue Nov 19 18:18:06 2019
+building and running Student CraneJonathan assignment code base from directory /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/BasicStatistics
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Number of datums:    4
+Min of datums:       22.300
+Max of datums:       872.100
+Sum of datums:       981.800
+Mean of datums:      245.450
+StdDev of datums:    361.913
+Copying Professor's JUnit source files in /Users/avraham/teaching/IntroToCompSci/assignments/BasicStatistics/src/test to Student CraneJonathan directory tree in /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/BasicStatistics/src
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 2
+Running edu.yu.intro.test.ProfessorBasicStatisticsTest
+Execution Started : happyPathSingleDataEntry
+Execution Finished : happyPathSingleDataEntry
+Execution Started : happyPathMultipleDataEntry
+Execution Finished : happyPathMultipleDataEntry
+Execution Started : noDataEntered
+Execution Finished : noDataEntered
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec - in edu.yu.intro.test.ProfessorBasicStatisticsTest
+Running edu.yu.intro.test.BasicStatisticsTest
+Execution Started : getStandardDeviationNoInput
+Execution Finished : getStandardDeviationNoInput
+Execution Started : getSumNoInput
+Execution Finished : getSumNoInput
+Execution Started : getStandardDeviationNegatives
+Execution Finished : getStandardDeviationNegatives
+Execution Started : getMaxNoInput
+Execution Finished : getMaxNoInput
+Execution Started : getMax
+Execution Finished : getMax
+Execution Started : getMin
+Execution Finished : getMin
+Execution Started : getSum
+Execution Finished : getSum
+Execution Started : getSumNegative
+Execution Finished : getSumNegative
+Execution Started : getNDatumsZero
+Execution Finished : getNDatumsZero
+Execution Started : getMeanNegative
+Execution Finished : getMeanNegative
+Execution Started : getMean
+Execution Finished : getMean
+Execution Started : getSumNegativeAnswer
+Execution Finished : getSumNegativeAnswer
+Execution Started : getStandardDeviation
+Execution Finished : getStandardDeviation
+Execution Started : getMinNoInput
+Execution Finished : getMinNoInput
+Execution Started : getMeanNoInput
+Execution Finished : getMeanNoInput
+Execution Started : getMinNegative
+Execution Finished : getMinNegative
+Execution Started : getNDatums
+Execution Finished : getNDatums
+Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec - in edu.yu.intro.test.BasicStatisticsTest
+Test cases executed : 20
+
+Results :
+
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0
+

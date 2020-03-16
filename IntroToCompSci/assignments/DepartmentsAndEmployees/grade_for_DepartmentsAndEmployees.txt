@@ -1,0 +1,268 @@
+Grade for assignment [CraneJonathan]: 8/10
+
+nice job on main(), your code didn't compile against my test code (see Piazza for next steps)
+
+
+Pulled files on Fri Dec  6 10:21:01 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/Department.java was on: Wed Dec 4 01:39:12 2019
+Latest commit of src/main/java/edu/yu/intro/Factory.java was on: Wed Dec 4 01:38:31 2019
+Latest commit of src/main/java/edu/yu/intro/Employee.java was on: Wed Dec 4 01:38:52 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Invoking main with one pair of files (should fail): 
+
+00001 40.0 80.2 24 Payroll
+00002 34.2 75.1 20 DataModelling
+00003 65.2 98.7 34 TechSupport
+00004 0.5  98.7 34 Payroll
+00005 -20.5 98.7 34 TechSupport
+00006 10.5 98.7 -2 DataModelling
+00007 10.5 98.7 38 Payroll
+00008 2.0 15.0 34 TechSupport
+00009 42.0 80.2 24 TechSupport
+00015 40.0 80.2 24 TechSupport
+00016 40.0 80.2 24 StealthDepartment
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+9
+9
+9
+8
+7
+11
+2
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Error: Too many departments in the file. No more than 10 may be inputted
+Invoking main with one pair of files (should NOT fail): 
+
+00001 40.0 80.2 24 Payroll
+00002 34.2 75.1 20 DataModelling
+00003 65.2 98.7 34 TechSupport
+00004 0.5  98.7 34 Payroll
+00005 -20.5 98.7 34 TechSupport
+00006 10.5 98.7 -2 DataModelling
+00007 10.5 98.7 38 Payroll
+00008 2.0 15.0 34 TechSupport
+00009 42.0 80.2 24 TechSupport
+00015 40.0 80.2 24 TechSupport
+00016 40.0 80.2 24 StealthDepartment
+Payroll
+TechSupport
+DataModelling
+Payroll
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+The department Payroll is repeated. Discarding the second one and continuing
+Problem at line #4: The amount of hours recorded, 0.5 is too small. Must be at least 1.0
+Problem at line #5: The amount of hours recorded, -20.5 is too small. Must be at least 1.0
+Problem at line #6: The deduction value, -2 is out of range. Deductions must be greater than zero and less than $35
+Problem at line #7: The deduction value, 38 is out of range. Deductions must be greater than zero and less than $35
+Error: You entered a negative number for NetPay, which was -10.0 on line8
+Problem at line #11 The department for employee 00016 does not match any known departments
+*************************************************
+     Department     # Employees Total Gross Pay Average Gross Pay
+        Payroll               1       3,208.00        3,208.00
+    TechSupport               3      13,011.64        4,337.21
+  DataModelling               1       2,568.42        2,568.42
+*************************************************
+Copying Professor's JUnit source files in /Users/avraham/teaching/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test to Student CraneJonathan directory tree in /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+[ERROR] COMPILATION ERROR : 
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[88,23] cannot find symbol
+  symbol:   method getDepartments()
+  location: variable factory of type edu.yu.intro.Factory
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[94,51] cannot find symbol
+  symbol:   method getDepartments()
+  location: variable factory of type edu.yu.intro.Factory
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[107,51] cannot find symbol
+  symbol:   method getDepartments()
+  location: variable factory of type edu.yu.intro.Factory
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[146,44] cannot find symbol
+  symbol:   method getDepartments()
+  location: variable factory of type edu.yu.intro.Factory
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.7.0:testCompile (default-testCompile) on project DepartmentsAndEmployees: Compilation failure: Compilation failure:
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[88,23] cannot find symbol
+[ERROR] symbol:   method getDepartments()
+[ERROR] location: variable factory of type edu.yu.intro.Factory
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[94,51] cannot find symbol
+[ERROR] symbol:   method getDepartments()
+[ERROR] location: variable factory of type edu.yu.intro.Factory
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[107,51] cannot find symbol
+[ERROR] symbol:   method getDepartments()
+[ERROR] location: variable factory of type edu.yu.intro.Factory
+[ERROR] /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test/java/edu/yu/intro/test/ProfessorDepartmentsAndEmployeesTest.java:[146,44] cannot find symbol
+[ERROR] symbol:   method getDepartments()
+[ERROR] location: variable factory of type edu.yu.intro.Factory
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Problem invoking 'maven test target': aborting this run
+Grade for assignment [CraneJonathan]: /10
+Pulled files on Mon Dec  9 10:10:25 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/Department.java was on: Wed Dec 4 01:39:12 2019
+Latest commit of src/main/java/edu/yu/intro/Factory.java was on: Sun Dec 8 17:30:16 2019
+Latest commit of src/main/java/edu/yu/intro/Employee.java was on: Wed Dec 4 01:38:52 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Invoking main with one pair of files (should fail): 
+
+00001 40.0 80.2 24 Payroll
+00002 34.2 75.1 20 DataModelling
+00003 65.2 98.7 34 TechSupport
+00004 0.5  98.7 34 Payroll
+00005 -20.5 98.7 34 TechSupport
+00006 10.5 98.7 -2 DataModelling
+00007 10.5 98.7 38 Payroll
+00008 2.0 15.0 34 TechSupport
+00009 42.0 80.2 24 TechSupport
+00015 40.0 80.2 24 TechSupport
+00016 40.0 80.2 24 StealthDepartment
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+9
+9
+9
+8
+7
+11
+2
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Error: Too many departments in the file. No more than 10 may be inputted
+Invoking main with one pair of files (should NOT fail): 
+
+00001 40.0 80.2 24 Payroll
+00002 34.2 75.1 20 DataModelling
+00003 65.2 98.7 34 TechSupport
+00004 0.5  98.7 34 Payroll
+00005 -20.5 98.7 34 TechSupport
+00006 10.5 98.7 -2 DataModelling
+00007 10.5 98.7 38 Payroll
+00008 2.0 15.0 34 TechSupport
+00009 42.0 80.2 24 TechSupport
+00015 40.0 80.2 24 TechSupport
+00016 40.0 80.2 24 StealthDepartment
+Payroll
+TechSupport
+DataModelling
+Payroll
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+The department Payroll is repeated. Discarding the second one and continuing
+Problem at line #4: The amount of hours recorded, 0.5 is too small. Must be at least 1.0
+Problem at line #5: The amount of hours recorded, -20.5 is too small. Must be at least 1.0
+Problem at line #6: The deduction value, -2 is out of range. Deductions must be greater than zero and less than $35
+Problem at line #7: The deduction value, 38 is out of range. Deductions must be greater than zero and less than $35
+Error: You entered a negative number for NetPay, which was -10.0 on line8
+Problem at line #11 The department for employee 00016 does not match any known departments
+*************************************************
+     Department     # Employees Total Gross Pay Average Gross Pay
+        Payroll               1       3,208.00        3,208.00
+    TechSupport               3      13,011.64        4,337.21
+  DataModelling               1       2,568.42        2,568.42
+*************************************************
+Copying Professor's JUnit source files in /Users/avraham/teaching/IntroToCompSci/assignments/DepartmentsAndEmployees/src/test to Student CraneJonathan directory tree in /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/DepartmentsAndEmployees/src
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 2
+Running edu.yu.intro.test.DepartmentAndEmployeesTest
+Execution Started : GettingEmployeesArray
+Execution Finished : GettingEmployeesArray
+Execution Started : EmployeeHrsWorkedTooLow
+Execution Finished : EmployeeHrsWorkedTooLow
+Execution Started : EmployeeHasGrossPay
+Execution Finished : EmployeeHasGrossPay
+Execution Started : EmployeeHasDepartment
+Execution Finished : EmployeeHasDepartment
+Execution Started : EmployeeHasTooManyValues
+Execution Finished : EmployeeHasTooManyValues
+Execution Started : EmployeeHasID
+Execution Finished : EmployeeHasID
+Execution Started : EmployeeNetPayInvalid
+Execution Finished : EmployeeNetPayInvalid
+Execution Started : TooManyDepartmentException
+Execution Finished : TooManyDepartmentException
+Execution Started : DoubleEmployee
+Execution Finished : DoubleEmployee
+Execution Started : EmployeeWageRateInvalid
+Execution Finished : EmployeeWageRateInvalid
+Execution Started : DepartmentOfEmployeeDoesntExist
+Execution Finished : DepartmentOfEmployeeDoesntExist
+Execution Started : NumberofEmployees
+Execution Finished : NumberofEmployees
+Execution Started : SameEmployesInputtedButDifferentDepartment
+Execution Finished : SameEmployesInputtedButDifferentDepartment
+Execution Started : SameEmployeeInputtedTwice
+Execution Finished : SameEmployeeInputtedTwice
+Execution Started : RepeatingDepartments
+Execution Finished : RepeatingDepartments
+Execution Started : DepartmentBuilderNumber
+Execution Finished : DepartmentBuilderNumber
+Execution Started : DepartmentWasRead
+Execution Finished : DepartmentWasRead
+Execution Started : EmployeeDeductionsTooLow
+Execution Finished : EmployeeDeductionsTooLow
+Execution Started : TooManyDepartmentsPerLine
+Execution Finished : TooManyDepartmentsPerLine
+Execution Started : TotalGrossPay
+Execution Finished : TotalGrossPay
+Execution Started : EmployesInputted
+Execution Finished : EmployesInputted
+Execution Started : EmployeeHrsWorkedInvalid
+Execution Finished : EmployeeHrsWorkedInvalid
+Execution Started : NameOfDepartment
+Execution Finished : NameOfDepartment
+Execution Started : EmployeeWageRateTooLow
+Execution Finished : EmployeeWageRateTooLow
+Execution Started : EmployeeDeductionsInvalid
+Execution Finished : EmployeeDeductionsInvalid
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 sec - in edu.yu.intro.test.DepartmentAndEmployeesTest
+Running edu.yu.intro.test.ProfessorDepartmentsAndEmployeesTest
+Execution Started : happyPath
+Execution Finished : happyPath
+Execution Started : oneDepartmentOneEmployee
+Execution Finished : oneDepartmentOneEmployee
+Execution Started : cantExceedMaxEmployees
+Execution Finished : cantExceedMaxEmployees
+Execution Started : onlyOneDepartmentTokenAllowed
+Execution Finished : onlyOneDepartmentTokenAllowed
+Execution Started : noDuplicateEmployees
+Execution Finished : noDuplicateEmployees
+Execution Started : employeeMustReferenceValidDepartment
+Execution Finished : employeeMustReferenceValidDepartment
+Execution Started : oneDepartmentNoEmployees
+Execution Finished : oneDepartmentNoEmployees
+Execution Started : cantExceedMaxDepartments
+Execution Finished : cantExceedMaxDepartments
+Execution Started : noDuplicateDepartments
+Execution Finished : noDuplicateDepartments
+Execution Started : noDepartmentsOrEmployees
+Execution Finished : noDepartmentsOrEmployees
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in edu.yu.intro.test.ProfessorDepartmentsAndEmployeesTest
+Test cases executed : 35
+
+Results :
+
+Tests run: 35, Failures: 0, Errors: 0, Skipped: 0
+

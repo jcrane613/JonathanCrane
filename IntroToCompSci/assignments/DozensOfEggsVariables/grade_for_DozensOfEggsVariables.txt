@@ -1,0 +1,10 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Wed Sep 11 09:16:47 EDT 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/DozensOfEggsVariables.java was on: Mon Sep 9 12:44:57 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Your number of eggs (18,972) gets packed into 1,581 boxes and 0 extras 
+Total packaging cost: $1138.32
+
+Nice on the commas!

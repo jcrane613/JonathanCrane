@@ -1,0 +1,145 @@
+Grade for assignment [CraneJonathan]: 10/10
+
+very nice!
+
+Pulled files on Wed Dec 25 09:17:17 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/Book.java was on: Tue Dec 24 00:28:04 2019
+Latest commit of src/main/java/edu/yu/intro/AuthorsAndBooks.java was on: Wed Dec 25 01:56:58 2019
+building Student CraneJonathan assignment code base from directory /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/AuthorsAndBooks
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+executing Student CraneJonathan main()
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+AuthorsAndBooks main - Number of distinct books:  250,012
+AuthorsAndBooks main - Number of distinct authors:  94,572
+AuthorsAndBooks main - Number of distinct publishers:  15,563
+AuthorsAndBooks main - Author with the most books: Agatha Christie
+AuthorsAndBooks main - Publisher with the most books: Harlequin
+Copying Professor's JUnit source files in /Users/avraham/teaching/IntroToCompSci/assignments/AuthorsAndBooks/src/test to Student CraneJonathan directory tree in /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/AuthorsAndBooks/src
+executing Professor's test code against Student CraneJonathan code
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 3
+Running edu.yu.intro.test.AuthorsAndBooksTest
+Execution Started : emptySetReturnAuthor
+Execution Finished : emptySetReturnAuthor
+Execution Started : emptySetReturnPublisher
+Execution Finished : emptySetReturnPublisher
+Execution Started : nullBook
+Execution Finished : nullBook
+Execution Started : getISBNChecker
+Execution Finished : getISBNChecker
+Execution Started : nonEmptyString1
+Execution Finished : nonEmptyString1
+Execution Started : nonEmptyString2
+Execution Finished : nonEmptyString2
+Execution Started : nonEmptyString3
+Execution Finished : nonEmptyString3
+Execution Started : nonEmptyString4
+Execution Finished : nonEmptyString4
+Execution Started : nonEmptyString5
+Execution Finished : nonEmptyString5
+Execution Started : nullPublisher
+Execution Finished : nullPublisher
+Execution Started : getTitleChecker
+Execution Finished : getTitleChecker
+Execution Started : emptyPublisherMostUnique
+Execution Finished : emptyPublisherMostUnique
+Execution Started : emptyPublisher
+Execution Finished : emptyPublisher
+Execution Started : UniquePublisherChecker
+Execution Finished : UniquePublisherChecker
+Execution Started : bookAlreadyAdded
+Execution Finished : bookAlreadyAdded
+Execution Started : booksByAuthorChecker
+Execution Finished : booksByAuthorChecker
+Execution Started : PublisherTieBreaker
+Execution Finished : PublisherTieBreaker
+Execution Started : emptyAuthorAllTitles
+Execution Finished : emptyAuthorAllTitles
+Execution Started : getPublisherChecker
+Execution Finished : getPublisherChecker
+Execution Started : emptySetReturnAllTitles
+Execution Finished : emptySetReturnAllTitles
+Execution Started : emptyAuthor
+Execution Finished : emptyAuthor
+Execution Started : allTitlesForAnAuthor
+Execution Finished : allTitlesForAnAuthor
+Execution Started : nullTitle
+Execution Finished : nullTitle
+Execution Started : getYearPublishedChecker
+Execution Finished : getYearPublishedChecker
+Execution Started : nullAuthor
+Execution Finished : nullAuthor
+Execution Started : booksByPublisherChecker
+Execution Finished : booksByPublisherChecker
+Execution Started : getAuthorChecker
+Execution Finished : getAuthorChecker
+Execution Started : nullValue1
+Execution Finished : nullValue1
+Execution Started : nullValue2
+Execution Finished : nullValue2
+Execution Started : nullValue3
+Execution Finished : nullValue3
+Execution Started : nullValue4
+Execution Finished : nullValue4
+Execution Started : nullValue5
+Execution Finished : nullValue5
+Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec - in edu.yu.intro.test.AuthorsAndBooksTest
+Running edu.yu.intro.test.TestAuthorsAndBooksProfessor
+Execution Started : booksByUnknownAuthor
+Execution Finished : booksByUnknownAuthor
+Execution Started : booksByKnownAuthor
+Execution Finished : booksByKnownAuthor
+Execution Started : publisherWithMostUAW
+Execution Finished : publisherWithMostUAW
+Execution Started : booksByEmptyAuthor
+Execution Finished : booksByEmptyAuthor
+Execution Started : bookAlreadyAdded
+Execution Finished : bookAlreadyAdded
+Execution Started : booksByUnknownPublisher
+Execution Finished : booksByUnknownPublisher
+Execution Started : titlesByKnownAuthor
+[INFO ] 2019-12-25 09:17:26.494 [main] TestAuthorsAndBooksProfessor titlesByKnownAuthor - 3
+[INFO ] 2019-12-25 09:17:26.495 [main] TestAuthorsAndBooksProfessor titlesByKnownAuthor - [ENDLESS NIGHT, El Misterio De Sittaford, Poirot en Egipto]
+Execution Finished : titlesByKnownAuthor
+Execution Started : booksByEmptyPublisher
+Execution Finished : booksByEmptyPublisher
+Execution Started : titlesByEmptyAuthor
+Execution Finished : titlesByEmptyAuthor
+Execution Started : titlesByUnknownAuthor
+Execution Finished : titlesByUnknownAuthor
+Execution Started : publisherWithMostUAWhenNoPublisher
+Execution Finished : publisherWithMostUAWhenNoPublisher
+Execution Started : booksByKnownPublisher
+Execution Finished : booksByKnownPublisher
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.214 sec - in edu.yu.intro.test.TestAuthorsAndBooksProfessor
+Running edu.yu.intro.test.TestBookProfessor
+Execution Started : testEmptyTitle
+Execution Finished : testEmptyTitle
+Execution Started : testEmptyYearPublished
+Execution Finished : testEmptyYearPublished
+Execution Started : testEmptyISBN
+Execution Finished : testEmptyISBN
+Execution Started : testEmptyAuthor
+Execution Finished : testEmptyAuthor
+Execution Started : testNotEquals
+Execution Finished : testNotEquals
+Execution Started : testVanillaConstructor
+[INFO ] 2019-12-25 09:17:26.529 [main] TestBookProfessor testVanillaConstructor - Created book The isbn is 9780689305450
+Execution Finished : testVanillaConstructor
+Execution Started : equalsAndHashcodeImplementation
+Execution Finished : equalsAndHashcodeImplementation
+Execution Started : testEmptyPublisher
+Execution Finished : testEmptyPublisher
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in edu.yu.intro.test.TestBookProfessor
+Test cases executed : 52
+
+Results :
+
+Tests run: 52, Failures: 0, Errors: 0, Skipped: 0
+

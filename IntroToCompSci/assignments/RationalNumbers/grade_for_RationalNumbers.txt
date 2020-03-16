@@ -1,0 +1,61 @@
+Grade for assignment [CraneJonathan]: 10/10
+Pulled files on Wed Nov 13 09:09:38 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/Rational.java was on: Wed Nov 13 00:21:10 2019
+building Student CraneJonathan assignment code base from directory /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/RationalNumbers
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 1
+Running edu.yu.intro.test.RationalTest
+Execution Started : testIllegalInvert
+Execution Finished : testIllegalInvert
+Execution Started : testToDouble
+[INFO ] 2019-11-13 09:09:42.138 [main] RationalTest testToDouble - rational(3, 6) = edu.yu.intro.Rational@5d47c63f
+[INFO ] 2019-11-13 09:09:42.139 [main] RationalTest testToDouble - toDouble=0.5
+Execution Finished : testToDouble
+Execution Started : testAdd
+[INFO ] 2019-11-13 09:09:42.139 [main] RationalTest testAdd - rational(2, 50)=edu.yu.intro.Rational@568bf312
+[INFO ] 2019-11-13 09:09:42.139 [main] RationalTest testAdd - rational(5, 10)=edu.yu.intro.Rational@ca263c2
+[INFO ] 2019-11-13 09:09:42.140 [main] RationalTest testAdd - sum=edu.yu.intro.Rational@589b3632
+Execution Finished : testAdd
+Execution Started : testCtor
+[INFO ] 2019-11-13 09:09:42.140 [main] RationalTest testCtor - rational(3, 6) = edu.yu.intro.Rational@45f45fa1
+Execution Finished : testCtor
+Execution Started : testNoArgCtor
+[INFO ] 2019-11-13 09:09:42.140 [main] RationalTest testNoArgCtor - rational = edu.yu.intro.Rational@4c6e276e
+Execution Finished : testNoArgCtor
+Execution Started : testNegateNegate
+[INFO ] 2019-11-13 09:09:42.141 [main] RationalTest testNegateNegate - rational(-3, 6) = edu.yu.intro.Rational@534df152
+[INFO ] 2019-11-13 09:09:42.141 [main] RationalTest testNegateNegate - negated=edu.yu.intro.Rational@534df152
+Execution Finished : testNegateNegate
+Execution Started : zeroCannotBeReduced
+[INFO ] 2019-11-13 09:09:42.141 [main] RationalTest zeroCannotBeReduced - Rational(0,5).reduce().getNumerator=0
+[INFO ] 2019-11-13 09:09:42.141 [main] RationalTest zeroCannotBeReduced - Rational(0,5).reduce().getDenominator=1
+[INFO ] 2019-11-13 09:09:42.142 [main] RationalTest zeroCannotBeReduced - irreducible zero = edu.yu.intro.Rational@52e677af
+Execution Finished : zeroCannotBeReduced
+Execution Started : testInvert
+[INFO ] 2019-11-13 09:09:42.142 [main] RationalTest testInvert - rational(3, 6) = edu.yu.intro.Rational@35083305
+[INFO ] 2019-11-13 09:09:42.142 [main] RationalTest testInvert - inverted=edu.yu.intro.Rational@35083305
+Execution Finished : testInvert
+Execution Started : testNegate
+[INFO ] 2019-11-13 09:09:42.142 [main] RationalTest testNegate - rational(3, 6) = edu.yu.intro.Rational@8e0379d
+[INFO ] 2019-11-13 09:09:42.143 [main] RationalTest testNegate - negated=edu.yu.intro.Rational@8e0379d
+Execution Finished : testNegate
+Execution Started : testZeroDenominator
+Execution Finished : testZeroDenominator
+Execution Started : testReduce
+[INFO ] 2019-11-13 09:09:42.143 [main] RationalTest testReduce - rational(24, 36)=edu.yu.intro.Rational@341b80b2
+[INFO ] 2019-11-13 09:09:42.143 [main] RationalTest testReduce - reduced=edu.yu.intro.Rational@55a1c291
+Execution Finished : testReduce
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.258 sec - in edu.yu.intro.test.RationalTest
+Test cases executed : 11
+
+Results :
+
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0
+

@@ -1,0 +1,97 @@
+Grade for assignment [CraneJonathan]: 9/10
+
+failed one test
+
+Pulled files on Fri Nov  8 08:54:23 EST 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/FindingPrimes.java was on: Sun Nov 3 00:31:12 2019
+building Student CraneJonathan assignment code base from directory /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/FindingPrimes
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+executing Student CraneJonathan main()
+Contents of input file ... 
+
+-1
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Nu? Enter the upper limit number that you want to search for primes:  [ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:1.6.0:java (default-cli) on project FindingPrimes: An exception occured while executing the Java class. Error: number supplied is out of bound. Must be between 2 and 10,000 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+Problem invoking 'maven exec:java': aborting this run
+Contents of input file ... 
+
+95
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Nu? Enter the upper limit number that you want to search for primes:  
+*************************************************
+INPUT ...
+Searched for primes up to: 95
+OUTPUT ...
+Found 24 primes from 2...95
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89]
+
+Copying Professor's JUnit source files in /Users/avraham/teaching/IntroToCompSci/assignments/FindingPrimes/src/test to Student CraneJonathan directory tree in /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/FindingPrimes/src
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+Test cases to execute : 2
+Running edu.yu.intro.test.ProfessorFindingPrimesTest
+Execution Started : primesNMustBeGreaterThan1
+Execution Finished : primesNMustBeGreaterThan1
+Execution Started : isPrimeNMustBeGreaterThan1
+Execution Finished : isPrimeNMustBeGreaterThan1
+Execution Started : primesWhereLimitIsPastPrime
+Execution Finished : primesWhereLimitIsPastPrime
+Execution Started : primesNCantExceedMaxLimit
+Execution Finished : primesNCantExceedMaxLimit
+Execution Started : primesWhereLimitIsPrime
+Execution Failure : java.lang.AssertionError: Asked for primes(71): array lengths differed, expected.length=20 actual.length=19
+Execution Finished : primesWhereLimitIsPrime
+Execution Started : detectPrime
+Execution Finished : detectPrime
+Execution Started : isPrimeNCantExceedMaxLimit
+Execution Finished : isPrimeNCantExceedMaxLimit
+Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.03 sec <<< FAILURE! - in edu.yu.intro.test.ProfessorFindingPrimesTest
+primesWhereLimitIsPrime(edu.yu.intro.test.ProfessorFindingPrimesTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+java.lang.AssertionError: Asked for primes(71): array lengths differed, expected.length=20 actual.length=19
+	at edu.yu.intro.test.ProfessorFindingPrimesTest.primesWhereLimitIsPrime(ProfessorFindingPrimesTest.java:49)
+
+Running edu.yu.intro.test.FindingPrimesTest
+Execution Started : primeChecker
+Execution Finished : primeChecker
+Execution Started : testPrimeTable
+Execution Finished : testPrimeTable
+Execution Started : primeBreakTooBig
+Execution Finished : primeBreakTooBig
+Execution Started : calculatePrimeBreakTooBig
+Execution Finished : calculatePrimeBreakTooBig
+Execution Started : primeBreakTooSmall
+Execution Finished : primeBreakTooSmall
+Execution Started : calculatePrimeBreakTooSmall
+Execution Finished : calculatePrimeBreakTooSmall
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in edu.yu.intro.test.FindingPrimesTest
+Test cases executed : 13
+
+Results :
+
+Failed tests: 
+  ProfessorFindingPrimesTest.primesWhereLimitIsPrime:49 Asked for primes(71): array lengths differed, expected.length=20 actual.length=19
+
+Tests run: 13, Failures: 1, Errors: 0, Skipped: 0
+
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.19.1:test (default-test) on project FindingPrimes: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/avraham/YUGitRepos/1300/CraneJonathan/IntroToCompSci/assignments/FindingPrimes/target/surefire-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+Problem invoking 'maven test target': aborting this run

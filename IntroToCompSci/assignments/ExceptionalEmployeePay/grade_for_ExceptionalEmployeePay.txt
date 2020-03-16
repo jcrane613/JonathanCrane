@@ -1,0 +1,74 @@
+Grade for assignment [CraneJonathan]: 10/10
+
+excellent work, especially on the error messages!
+
+Pulled files on Fri Oct 25 10:19:36 EDT 2019
+Latest commit of student files ....
+Latest commit of src/main/java/edu/yu/intro/ExceptionalEmployeePay.java was on: Thu Oct 24 23:46:15 2019
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+
+
+Bob 40.0 80.2 24
+Jill 42.0 "80.2" 24
+Susan 42.0 80.2 "24"
+Hillary 42.0 80.2 24.0
+Tom 42.0 80.2 24 32 34
+Roger 40.0 83.2 24
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+*************************************************
+             Id       Gross Pay          Taxes      Net Pay        Average Pay
+            Bob        3,208.00         481.20      2,542.40            63.56
+Problem at line # 2: Could not parse Wage Rate ["80.2"] into valid input
+Problem at line # 3: Could not parse Deductions ["24"] into valid input
+Problem at line # 4: Could not parse Deductions [24.0] into valid input
+Problem at line # 5: Expected 4 tokens per line, found 6. Discarding input & advancing
+          Roger        3,328.00         499.20      2,638.40            65.96
+
+
+
+                       Total Gross Pay:  6,536.00
+                           Total Taxes:  980.40
+       Employee with Largest Gross Pay:  Roger
+*************************************************
+
+
+00001 40.0 80.2 24.0
+00002 34.2 75.1 20
+00003 65.2 98.7 34
+00004 0.5  98.7 34
+00005 -20.5 98.7 34
+00006 10.5 98.7 -2
+00007 10.5 98.7 38
+00008 2.0 15.0 34
+00009 42.0 80.2 24
+00010 "42.0" 80.2 24
+00011 42.0 "80.2" 24
+00012 42.0 80.2 "24"
+00013 42.0 80.2 24.0
+00014 42.0 80.2 24 32 34
+00015 40.0 80.2 24
+Picked up JAVA_TOOL_OPTIONS: -Xms4096m -Xmx15G -XX:MaxMetaspaceSize=1G
+*************************************************
+             Id       Gross Pay          Taxes      Net Pay        Average Pay
+Problem at line # 1: Could not parse Deductions [24.0] into valid input
+          00002        2,568.42         385.26      2,034.74            59.50
+          00003        6,435.24         965.29      5,114.19            78.44
+Problem at line # 4: The amount of hours recorded, 0.5 is too small. Must be at least 1.0
+Problem at line # 5: The amount of hours recorded, -20.5 is too small. Must be at least 1.0
+Problem at line # 6: The deduction value, -2 is out of range. Deductions must be greater than zero and less than $35
+Problem at line # 7: The deduction value, 38 is out of range. Deductions must be greater than zero and less than $35
+Problem at line # 8: The Net Pay, -10.00 is a negative number
+          00009        3,368.40         505.26      2,670.72            63.59
+Problem at line # 10: Could not parse Hours Worked ["42.0"] into valid input
+Problem at line # 11: Could not parse Wage Rate ["80.2"] into valid input
+Problem at line # 12: Could not parse Deductions ["24"] into valid input
+Problem at line # 13: Could not parse Deductions [24.0] into valid input
+Problem at line # 14: Expected 4 tokens per line, found 6. Discarding input & advancing
+          00015        3,208.00         481.20      2,542.40            63.56
+
+
+
+                       Total Gross Pay:  15,580.06
+                           Total Taxes:  2,337.01
+       Employee with Largest Gross Pay:  00003
+*************************************************
