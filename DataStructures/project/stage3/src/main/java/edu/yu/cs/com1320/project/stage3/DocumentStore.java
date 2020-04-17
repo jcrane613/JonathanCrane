@@ -70,28 +70,28 @@ public interface DocumentStore
      * Retrieve all documents whose text starts with the given prefix
      * Documents are returned in sorted, descending order, sorted by the number of times the prefix appears in the document.
      * Search is CASE INSENSITIVE.
-     * @param prefix
+     * @param keywordPrefix
      * @return a List of the matches. If there are no matches, return an empty list.
      */
-    List<String> searchByPrefix(String prefix);
+    List<String> searchByPrefix(String keywordPrefix);
 
     /**
      * same logic as searchByPrefix, but returns the docs as PDFs instead of as Strings
      */
-    List<byte[]> searchPDFsByPrefix(String prefix);
+    List<byte[]> searchPDFsByPrefix(String keywordPrefix);
 
     /**
-     * delete ALL exact matches for the given key
-     * @param key
+     * Completely remove any trace of any document which contains the given keyword
+     * @param keyword
      * @return a Set of URIs of the documents that were deleted.
      */
-    Set<URI> deleteAll(String key);
+    Set<URI> deleteAll(String keyword);
 
     /**
-     * Delete all matches that contain a String with the given prefix.
+     * Completely remove any trace of any document which contains a word that has the given prefix
      * Search is CASE INSENSITIVE.
-     * @param prefix
+     * @param keywordPrefix
      * @return a Set of URIs of the documents that were deleted.
      */
-    Set<URI> deleteAllWithPrefix(String prefix);
+    Set<URI> deleteAllWithPrefix(String keywordPrefix);
 }

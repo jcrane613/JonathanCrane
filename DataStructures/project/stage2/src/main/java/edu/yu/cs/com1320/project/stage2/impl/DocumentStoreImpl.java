@@ -125,6 +125,8 @@ public class DocumentStoreImpl implements DocumentStore
 		Document testDocument = (Document) hashTable.get(uri);
 		if (testDocument !=null && testDocument.getDocumentTextHashCode() == txthash)
 		{
+			Command command = new Command(uri, ((k) -> doNothing(k)));
+			stack.push(command);
 			return testDocument.getDocumentTextHashCode();
 		}
 		if (testDocument != null && testDocument.getDocumentTextHashCode() != txthash)//same uri
@@ -159,6 +161,7 @@ public class DocumentStoreImpl implements DocumentStore
 	private boolean deleteUndoCommand(URI k)
 	{
 		hashTable.put(k,deletedHashTable.get(k));
+		deletedHashTable.put(k,null);//delete the old doc from the hashtable that was storing it
 		return true;
 	}
 	private boolean deleteUndoPut(URI uri)
@@ -178,6 +181,7 @@ public class DocumentStoreImpl implements DocumentStore
 		{
 			hashTable.put(uri,null);//delete the old value
 			hashTable.put(uri,deletedHashTable.get(uri));//put the new one back in
+			deletedHashTable.put(uri,null);
 			return true;
 		}
 		else {
@@ -207,7 +211,7 @@ public class DocumentStoreImpl implements DocumentStore
 		{
 			deletedHashTable.put(uri,hashTable.get(uri));//add it to a deleted hashtable
 			hashTable.put(uri,null);//delete the old value
-			Command command = new Command(uri, k -> deleteUndoCommand(k));
+			Command command = new Command(uri, (k) -> deleteUndoCommand(k));
 			stack.push(command);
 			return true;
 		}
@@ -265,61 +269,6 @@ public class DocumentStoreImpl implements DocumentStore
 		else{
 			return null;
 		}
-	}
-	public void print()
-	{
-		hashTable.printTest();
-	}
-
-	public static void main(String[] args) throws URISyntaxException, IOException {
-		String pdfTxt1 = "This is some PDF text for doc1, hat tip to Adobe.";
-		byte[] pdfData1 = textToPdfData(pdfTxt1);
-		URI uri1 = new URI("http://edu.yu.cs/com1320/project/doc1");
-		URI uri2 = new URI("http://edu.yu.cs/com1320/project/doc2");
-		String txt2 = "Text for doc2. A plain old String.";
-		String pdfTxt2 = "PDF content for doc2: PDF format was opened in 2008.";
-		byte[] pdfData2 = textToPdfData(pdfTxt2);
-		DocumentStoreImpl store = new DocumentStoreImpl();
-		store.putDocument(new ByteArrayInputStream(pdfData1), uri1, PDF);
-		store.putDocument(new ByteArrayInputStream(pdfData2), uri2, PDF);
-		URI jonathan = new URI("www.youtubee");
-		URI moshe = new URI("www.thisboy/isrunnig");
-		String txt1 = "This is the text of doc1, in plain text. No fancy file format - just plain old String";
-		String txt4 = "This is the  of doc1, in  text. No fancy  format - just plain String";
-		store.putDocument(new ByteArrayInputStream(txt1.getBytes()),jonathan, TXT);
-		store.putDocument(new ByteArrayInputStream(txt4.getBytes()), moshe, TXT);
-		System.out.println("full version");
-		store.print();
-		store.undo(uri1);
-		System.out.println("one undo");
-		store.print();
-		store.undo();
-		System.out.println("second undo");
-		store.print();
-		store.undo();
-		System.out.println("third undo");
-		store.print();
-
-	}
-	public static byte[] textToPdfData(String text) throws IOException {
-		//setup document and page
-		PDDocument document = new PDDocument();
-		PDPage page = new PDPage();
-		document.addPage(page);
-		PDPageContentStream content = new PDPageContentStream(document, page);
-		content.beginText();
-		PDFont font = PDType1Font.HELVETICA_BOLD;
-		content.setFont(font, 10);
-		content.newLineAtOffset(20, 20);
-		//add text
-		content.showText(text);
-		content.endText();
-		content.close();
-		//save to ByteArrayOutputStream
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		document.save(outputStream);
-		document.close();
-		return outputStream.toByteArray();
 	}
 
 }

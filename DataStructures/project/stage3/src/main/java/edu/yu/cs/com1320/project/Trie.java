@@ -1,5 +1,6 @@
 package edu.yu.cs.com1320.project;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -20,21 +21,23 @@ public interface Trie<Value>
      * get all exact matches for the given key, sorted in descending order.
      * Search is CASE INSENSITIVE.
      * @param key
+     * @param comparator used to sort  values
      * @return a List of matching Values, in descending order
      */
-    List<Value> getAllSorted(String key);
+    List<Value> getAllSorted(String key, Comparator<Value> comparator);
 
     /**
      * get all matches which contain a String with the given prefix, sorted in descending order.
      * For example, if the key is "Too", you would return any value that contains "Tool", "Too", "Tooth", "Toodle", etc.
      * Search is CASE INSENSITIVE.
      * @param prefix
+     * @param comparator used to sort values
      * @return a List of all matching Values containing the given prefix, in descending order
      */
-    List<Value> getAllWithPrefixSorted(String prefix);
+    List<Value> getAllWithPrefixSorted(String prefix, Comparator<Value> comparator);
 
     /**
-     * Delete all matches that contain a String with the given prefix.
+     * Delete the subtree rooted at the last character of the prefix.
      * Search is CASE INSENSITIVE.
      * @param prefix
      * @return a Set of all Values that were deleted.
@@ -42,17 +45,17 @@ public interface Trie<Value>
     Set<Value> deleteAllWithPrefix(String prefix);
 
     /**
-     * delete ALL exact matches for the given key
+     * Delete all values from the node of the given key (do not remove the values from other nodes in the Trie)
      * @param key
      * @return a Set of all Values that were deleted.
      */
     Set<Value> deleteAll(String key);
 
     /**
-     * delete ONLY the given value from the given key. Leave all other values.
+     * Remove the given value from the node of the given key (do not remove the value from other nodes in the Trie)
      * @param key
      * @param val
-     * @return if there was a Value already at that key, return that previous Value. Otherwise, return null.
+     * @return the value which was deleted. If the key did not contain the given value, return null.
      */
     Value delete(String key, Value val);
 }

@@ -1,71 +1,18 @@
 package edu.yu.cs.com1320.project.impl;
 
 import edu.yu.cs.com1320.project.HashTable;
+import edu.yu.cs.com1320.project.impl.HashTableImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
 import static org.junit.Assert.*;
 
-public class HashTableImplTestMe {
 
-	@Test
-	public void getWithInt() {
-		HashTableImpl<Integer, Integer> hashTable = new HashTableImpl<Integer, Integer>();
-		hashTable.put(1, 27);
-		hashTable.put(3, 7);
-		hashTable.put(6, 2);
-		hashTable.put(16, 22);
-		hashTable.put(0, 22);
-		assertEquals((Integer)22,hashTable.get(16));
-		assertEquals((Integer)22,hashTable.get(0));
-		assertEquals((Integer)7,hashTable.get(3));
-		assertEquals(null,hashTable.get(21));
-	}
-	@Test
-	public void put()
-	{
-		HashTableImpl<Integer, Integer> hashTable = new HashTableImpl<Integer, Integer>();
-		assertEquals(null,hashTable.put(1, 27));
-		assertEquals(null,hashTable.put(3, 7));
-		assertEquals(null,hashTable.put(6, 2));
-		assertEquals(null,hashTable.put(16, 22));
-		assertEquals((Integer)27,hashTable.put(1, 22));
-	}
-	@Test
-	public void delete()
-	{
-		HashTableImpl<Integer, Integer> hashTable = new HashTableImpl<Integer, Integer>();
-		hashTable.put(1, 27);
-		hashTable.put(3, 7);
-		hashTable.put(6, 2);
-		hashTable.put(16, 22);
-		hashTable.put(0, 22);
-		hashTable.put(1, null);
-		hashTable.put(1, 27);
-		hashTable.put(6, null);
-		hashTable.put(6, 2);
-		hashTable.put(16, null);
-		hashTable.put(16, 22);
-		hashTable.put(23, null); //nothing was put in this bucket
-		hashTable.put(21, null);//not in the first bucket
-		hashTable.put(4, null);//nothing is in this row
+public class HashTableImplTest {
 
-	}
-	@Test
-	public void putMethodWhenKeyIsAlreadyPresent()
-	{
-		HashTableImpl<Integer, Integer> hashTable = new HashTableImpl<Integer, Integer>();
-		hashTable.put(2, 7);
-		assertEquals(null, hashTable.put(7, 22));//return null when the key was not inputted before
-		hashTable.put(12, 29);
-		assertEquals((Integer)22,hashTable.put(7,45));//return the previous value since the key was already inside
-		assertEquals((Integer)45,hashTable.get(7));//replace the old value
-	}
-	//API Testing
 	@Test
 	public void interfaceCount() {//tests that the class only implements one interface and its the correct one
 		@SuppressWarnings("rawtypes")
@@ -125,11 +72,18 @@ public class HashTableImplTestMe {
 			new HashTableImpl<String,String>().get("hello");
 		} catch (RuntimeException e) {}//catch any run time error this input might cause. This is meant to test method existence, not correctness
 	}
+
+	@Test
+	public void stage2NoArgsConstructorExists(){
+		try {
+			new HashTableImpl<>();
+		} catch (RuntimeException e) {}
+	}
 	private HashTable<String,String> table;
 
 	@Before
 	public void initTable(){
-		this.table = new HashTableImpl<String, String>();
+		this.table = new HashTableImpl<>();
 		this.table.put("Key1", "Value1");
 		this.table.put("Key2","Value2");
 		this.table.put("Key3","Value3");
@@ -192,14 +146,19 @@ public class HashTableImplTestMe {
 		for(int i = 0; i <= 23; i++) {
 			table.put(i, "entry " + i);
 		}
-		assertEquals("entry 12",table.put(12, "entry 12+1"));
-		assertEquals("entry 12+1",table.get(12));
+		assertEquals("entry 12",table.put(12, "entry 12v2"));
+		assertEquals("entry 12v2",table.get(12));
 		assertEquals("entry 23",table.get(23));
 	}
 	@Test
-	public void constructorExistsTest() {
-		try {
-			new HashTableImpl<>();
-		} catch (Exception e) {}
+	public void stage2TestArrayDoubling(){
+		testSeparateChaining();
 	}
+	@Test
+	public void stage2TestNoArgsConstructorExists(){
+		try {
+			new HashTableImpl();
+		} catch (RuntimeException e) {}
+	}
+
 }

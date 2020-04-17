@@ -3,7 +3,7 @@ package edu.yu.cs.com1320.project;
 import java.net.URI;
 import java.util.function.Function;
 
-public final class Command {
+public class Command {
     /**
      * the URI of the document this command was executed on
      */

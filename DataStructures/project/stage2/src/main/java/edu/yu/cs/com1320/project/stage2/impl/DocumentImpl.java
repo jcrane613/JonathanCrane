@@ -58,6 +58,7 @@ public class DocumentImpl implements Document
 				PDPageContentStream contents = new PDPageContentStream(doc, page);
 				contents.beginText();
 				contents.setFont(font, 12);
+				contents.newLineAtOffset(20, 20);
 				contents.showText(txt);
 				contents.endText();
 				contents.close();

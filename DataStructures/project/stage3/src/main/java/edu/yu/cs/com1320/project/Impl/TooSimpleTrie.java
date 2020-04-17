@@ -1,4 +1,4 @@
-package edu.yu.cs.com1320.project.Impl;//i changed the director. Check what his is when i upload
+package edu.yu.cs.com1320.project.impl;//i changed the director. Check what his is when i upload
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +14,8 @@ public abstract class TooSimpleTrie<Value>
 
     public static class Node<Value>
     {
-        protected Value val;
-        protected Node[] links = new Node[TooSimpleTrie.alphabetSize];
+        private Value val;
+        private Node[] links = new Node[TooSimpleTrie.alphabetSize];
     }
 
     /**

@@ -1,6 +1,11 @@
-package edu.yu.cs.com1320.project.stage3.impl;
+package edu.yu.cs.com1320.project.stage4.impl;
 
-import edu.yu.cs.com1320.project.stage3.Document;
+import edu.yu.cs.com1320.project.stage4.Document;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,19 +13,12 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-
 public class DocumentImpl implements Document {
-
 	private URI uri;
 	private String txt;
 	private int txtHash;
 	private byte[] pdfBytes;
-	private HashMap<String, Integer> hashMap = new HashMap<>();
+	private HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
 	public DocumentImpl(URI uri, String txt, int txtHash)
 	{
 		if (uri == null)
@@ -125,5 +123,16 @@ public class DocumentImpl implements Document {
 		String input = deleteCharacters.toUpperCase();
 		return input;
 	}
-}
 
+	public long getLastUseTime() {
+		return 0;
+	}
+
+	public void setLastUseTime(long timeInMilliseconds) {
+
+	}
+
+	public int compareTo(Document o) {
+		return 0;
+	}
+}
