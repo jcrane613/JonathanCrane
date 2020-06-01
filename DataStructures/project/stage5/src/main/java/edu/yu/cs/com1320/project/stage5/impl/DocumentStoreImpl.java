@@ -335,9 +335,10 @@ public class DocumentStoreImpl implements DocumentStore {
 	private void removeDocHeap(Document doc) {
 		doc.setLastUseTime(Long.MIN_VALUE);
 		MinheapCompartor min = hashMap.get(doc.getKey());
-		min.setLastTime(Long.MIN_VALUE);
-		minHeap.removeMin();
 		hashMap.remove(doc.getKey());
+		min.setLastTime(Long.MIN_VALUE);
+		minHeap.reHeapify(min);
+		minHeap.removeMin();
 	}
 	private boolean deleteUndoPutAlreadyExisting(URI uri, Document DelDoc) {
 		Document currentDoc = (Document) bTree.get(uri);
@@ -388,9 +389,6 @@ public class DocumentStoreImpl implements DocumentStore {
 				return false;
 			}
 		deleteInputKey(doc.getDocumentAsTxt(), doc.getKey());
-		bTree.put(uri,null);//delete the old value
-		GenericCommand command = new GenericCommand(uri, (k) -> deleteUndoCommand(doc));
-		stack.push(command);
 		try
 		{
 			removeDocHeap(doc);
@@ -398,6 +396,9 @@ public class DocumentStoreImpl implements DocumentStore {
 		{
 			e.printStackTrace();
 		}
+		bTree.put(uri,null);//delete the old value
+		GenericCommand command = new GenericCommand(uri, (k) -> deleteUndoCommand(doc));
+		stack.push(command);
 		CurrentDocCount--;
 		CurrentBytes -= getBytes(doc);
 		return true;

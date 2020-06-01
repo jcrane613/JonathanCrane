@@ -594,7 +594,7 @@ public class DocumentStoreImplTest {
         //at this point, 1 and 3 should be in memory, and 2 should be gone
         assertNotNull("doc3 should be in memory",store.getDocument(this.uri3));
         assertNotNull("doc1 should be in memory",store.getDocument(this.uri1));
-        //assertNull("doc2 should be null because it was deleted",store.getDocument(this.uri2));
+       // assertNull("doc2 should be null because it was deleted",store.getDocument(this.uri2));
         //undo the deletion of doc2, which should push doc1 out to disk. doc2 and doc3 should be in memory
         store.undo(this.uri2);
         assertNull("doc1 should NOT be in memory",store.getDocument(this.uri1));
