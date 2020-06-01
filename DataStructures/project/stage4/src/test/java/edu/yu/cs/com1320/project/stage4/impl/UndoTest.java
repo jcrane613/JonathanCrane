@@ -1,8 +1,7 @@
-package edu.yu.cs.com1320.project.stage3.impl;
+package edu.yu.cs.com1320.project.stage4.impl;
 
-
-import edu.yu.cs.com1320.project.stage3.Document;
-import edu.yu.cs.com1320.project.stage3.DocumentStore;
+import edu.yu.cs.com1320.project.stage4.Document;
+import edu.yu.cs.com1320.project.stage4.DocumentStore;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +13,6 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 public class UndoTest {
-
 	//variables to hold possible values for doc1
 	private URI uri1;
 	private String txt1;
@@ -59,19 +57,19 @@ public class UndoTest {
 	public void init() throws Exception {
 		//init possible values for doc1
 		this.uri1 = new URI("http://edu.yu.cs/com1320/project/doc1");
-		this.txt1 = "This is the text of doc1, in plain text. No fancy file format - just plain old String";
+		this.txt1 = "keyword1 This is the text of doc1, in plain text. No fancy file format - just plain old String";
 
 		//init possible values for doc2
 		this.uri2 = new URI("http://edu.yu.cs/com1320/project/doc2");
-		this.txt2 = "Text for doc2. A plain old String.";
+		this.txt2 = "keyword1 Text for doc2. A plain old String.";
 
-		//init possible values for doc1
+		//init possible values for doc3
 		this.uri3 = new URI("http://edu.yu.cs/com1320/project/doc3");
-		this.txt3 = "This is the text of doc3 - doc doc goose";
+		this.txt3 = "keyword123 This is the text of doc3 - doc doc goose";
 
-		//init possible values for doc2
+		//init possible values for doc4
 		this.uri4 = new URI("http://edu.yu.cs/com1320/project/doc4");
-		this.txt4 = "doc4: how much wood would a woodchuck chuck...";
+		this.txt4 = "keyword12 doc4: how much wood would a woodchuck chuck...";
 	}
 
 	@Test
@@ -179,41 +177,75 @@ public class UndoTest {
 		dsi.undo(this.uri2);
 		assertTrue("should've returned original text",dsi.getDocument(this.uri2).getDocumentAsTxt().equals(this.txt2));
 	}
+
+	//undo most recent when most recent deleted multiple documents
 	@Test
-	public void stage3UndoByURIThatImpactsEarlierThanLast() {
-		String prefix = "keyword12";
-		String keyword = "keyword1";
+	public void stage3PlainUndoThatImpactsMultiple(){
+		String keyword1 = "keyword1";
 		//step 1: put all documents in
 		DocumentStoreImpl dsi = createStoreAndPutAll();
 
-		//step 2: delete multiple docs that have the same prefix, and then delete others by keyword
-		dsi.deleteAllWithPrefix(prefix);
-		dsi.deleteAll(keyword);
+		//step 2: delete multiple docs that have the same keyword
+		dsi.deleteAll(keyword1);
 		//make sure they are gone - search by keyword
-		List<String> results = dsi.search(keyword);
+		List<String> results = dsi.search(keyword1);
 		assertEquals("docs with keyword1 should be gone - List size should be 0",0,results.size());
-		results = dsi.searchByPrefix(prefix);
-		assertEquals("docs with prefix " + prefix + " should be gone - List size should be 0",0,results.size());
 		//make sure they are gone by URI - use protected method
 		assertNull("document with URI " + this.uri1 + "should've been deleted",dsi.getDocument(this.uri1));
 		assertNull("document with URI " + this.uri2 + "should've been deleted",dsi.getDocument(this.uri2));
-		assertNull("document with URI " + this.uri3 + "should've been deleted",dsi.getDocument(this.uri3));
-		assertNull("document with URI " + this.uri4 + "should've been deleted",dsi.getDocument(this.uri4));
+		//make sure other docs are still there - use protected method
+		assertNotNull("document with URI " + this.uri3 + "should NOT have been deleted",dsi.getDocument(this.uri3));
+		assertNotNull("document with URI " + this.uri4 + "should NOT have been deleted",dsi.getDocument(this.uri4));
 
-		//step 3: undo the deletion of doc 3
-		dsi.undo(this.uri3);
+		//step 3: undo the last command, i.e. the delete
+		dsi.undo();
 
-		//check that doc3 is back by keyword
-		results = dsi.search("keyword123");
-		assertEquals("doc3 should be back - List size should be 1",1,results.size());
-		//check that doc3 is back but none of the others are back
-		assertNotNull("document with URI " + this.uri3 + "should be back",dsi.getDocument(this.uri3));
-		assertNull("document with URI " + this.uri1 + "should still be null",dsi.getDocument(this.uri1));
-		assertNull("document with URI " + this.uri2 + "should NOT have been deleted",dsi.getDocument(this.uri2));
-		assertNull("document with URI " + this.uri4 + "should NOT have been deleted",dsi.getDocument(this.uri4));
+		//check that they are back by keyword
+		results = dsi.search(keyword1);
+		assertEquals("docs with keyword1 should be back - List size should be 2",2,results.size());
+		//check that they are back by URI - use protected method
+		assertNotNull("document with URI " + this.uri1 + "should be back",dsi.getDocument(this.uri1));
+		assertNotNull("document with URI " + this.uri2 + "should be back",dsi.getDocument(this.uri2));
+		//make sure the other docs are still unaffected - by protected method
+		assertNotNull("document with URI " + this.uri3 + "should NOT have been deleted",dsi.getDocument(this.uri3));
+		assertNotNull("document with URI " + this.uri4 + "should NOT have been deleted",dsi.getDocument(this.uri4));
 	}
+	//undo by URI which is part of most recent which deleted multiple documents
 	@Test
-	public void stage3UndoByURIThatImpactsEarlierThanLastTryAgain() {
+	public void stage3UndoByURIThatImpactsOne() {
+		String keyword1 = "keyword1";
+		//step 1: put all documents in
+		DocumentStoreImpl dsi = createStoreAndPutAll();
+
+		//step 2: delete multiple docs that have the same keyword
+		dsi.deleteAll(keyword1);
+		//make sure they are gone - search by keyword
+		List<String> results = dsi.search(keyword1);
+		assertEquals("docs with keyword1 should be gone - List size should be 0",0,results.size());
+		//make sure they are gone by URI - use protected method
+		assertNull("document with URI " + this.uri1 + "should've been deleted",dsi.getDocument(this.uri1));
+		assertNull("document with URI " + this.uri2 + "should've been deleted",dsi.getDocument(this.uri2));
+		//make sure other docs are still there - use protected method
+		assertNotNull("document with URI " + this.uri3 + "should NOT have been deleted",dsi.getDocument(this.uri3));
+		assertNotNull("document with URI " + this.uri4 + "should NOT have been deleted",dsi.getDocument(this.uri4));
+
+		//step 3: undo the deletion of doc 2
+		dsi.undo(this.uri2);
+
+		//check that doc2 is back by keyword
+		results = dsi.search(keyword1);
+		assertEquals("doc2 should be back - List size should be 1",1,results.size());
+		assertEquals("doc2 should be back",results.get(0),this.txt2);
+		//check that doc2 is back by URI but doc 1 is still null- use protected method
+		assertNotNull("document with URI " + this.uri2 + "should be back",dsi.getDocument(this.uri2));
+		assertNull("document with URI " + this.uri1 + "should still be null",dsi.getDocument(this.uri1));
+		//make sure the other docs are still unaffected - by protected method
+		assertNotNull("document with URI " + this.uri3 + "should NOT have been deleted",dsi.getDocument(this.uri3));
+		assertNotNull("document with URI " + this.uri4 + "should NOT have been deleted",dsi.getDocument(this.uri4));
+	}
+	//undo by URI which is EARLIER than most recent
+	@Test
+	public void stage3UndoByURIThatImpactsEarlierThanLast() {
 		String prefix = "keyword12";
 		String keyword = "keyword1";
 		//step 1: put all documents in

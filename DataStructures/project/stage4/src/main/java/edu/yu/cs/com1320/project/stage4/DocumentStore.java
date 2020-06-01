@@ -101,7 +101,7 @@ public interface DocumentStore
     void setMaxDocumentCount(int limit);
 
     /**
-     * set maximum number of bytes of memory that may be used by all the compressed documents in memory combined
+     * set maximum number of bytes of memory that may be used by all the documents in memory combined
      * @param limit
      */
     void setMaxDocumentBytes(int limit);

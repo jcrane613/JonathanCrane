@@ -3,31 +3,19 @@ package edu.yu.cs.com1320.project.stage4.impl;
 import edu.yu.cs.com1320.project.CommandSet;
 import edu.yu.cs.com1320.project.GenericCommand;
 import edu.yu.cs.com1320.project.Undoable;
+import edu.yu.cs.com1320.project.impl.MinHeapImpl;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.*;
-
-
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
-
-import edu.yu.cs.com1320.project.CommandSet;
-import edu.yu.cs.com1320.project.GenericCommand;
-import edu.yu.cs.com1320.project.Undoable;
 import edu.yu.cs.com1320.project.impl.HashTableImpl;
 import edu.yu.cs.com1320.project.impl.StackImpl;
 import edu.yu.cs.com1320.project.stage4.Document;
 import edu.yu.cs.com1320.project.stage4.DocumentStore;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import edu.yu.cs.com1320.project.impl.TrieImpl;
 
 public class DocumentStoreImpl implements DocumentStore{
@@ -38,6 +26,11 @@ public class DocumentStoreImpl implements DocumentStore{
 	private TrieImpl<Document> documentTrie = new TrieImpl<>();
 	private HashTableImpl<URI, Document> hashTableDeleteUndoDeleteAll = new HashTableImpl<>();
 	private HashTableImpl<URI, Document> hashTableDeleteUndoDeletePrefix = new HashTableImpl<>();
+	private int MaxDocumentCount = Integer.MAX_VALUE ;
+	private int	CurrentDocCount = 0;
+	private int MaxDocumentBytes = Integer.MAX_VALUE;
+	private int	CurrentBytes = 0;
+	MinHeapImpl minHeap = new MinHeapImpl();
 	public DocumentStoreImpl()
 	{}
 	public int putDocument(InputStream input, URI uri, DocumentFormat format) {
@@ -47,17 +40,59 @@ public class DocumentStoreImpl implements DocumentStore{
 		{
 			return checkURINull(uri);
 		}
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		int txthash = 0;
 		byte[] inputByte = convertToByteArray(input);
 		if (format == DocumentFormat.PDF)
 		{
+			while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 			return pdfHelper(inputByte,txthash,uri);
 		}
 		if (format == DocumentFormat.TXT)
 		{
+			while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 			return txtHelper(inputByte, txthash, uri);
 		}
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		return txthash;
+	}
+
+	private void removeTooManyDoc()
+	{
+		Document doc = (Document) minHeap.removeMin();//takes it out of the heap, and decides which will be deleted
+		deleteHeapWithoutReheapify(doc.getKey()); //gets rid of trie/hashtable
+		StackImpl stackSwitch = new StackImpl();
+		while(stack.size() != 0)//gets rid of commands in stack
+		{
+			boolean skip = false;
+			Undoable command = stack.peek();
+			if (command instanceof CommandSet)
+			if (((CommandSet) command).containsTarget(doc.getKey()))
+			{
+				while (((CommandSet) command).iterator().hasNext())
+				{
+					URI uri = (URI) ((CommandSet) command).iterator().next();
+					if (uri == doc.getKey())
+					{
+						((CommandSet) command).iterator().remove();
+						break;
+					}
+				}
+			}
+			if (command instanceof GenericCommand)
+			if ((command.hashCode()) == (doc.getKey().hashCode()))
+			{
+				stack.pop();//get rid of this command,
+				skip = true; //don't add anything to the temp stake
+			}
+			if (skip == false)
+			{
+				stackSwitch.push(stack.pop());
+			}
+		}
+		while (stackSwitch.size() != 0) {
+		stack.push((Undoable) stackSwitch.pop());
+		}
 	}
 	private int checkURINull(URI uri)
 	{
@@ -111,6 +146,8 @@ public class DocumentStoreImpl implements DocumentStore{
 			{
 				GenericCommand command = new GenericCommand(uri, ((j) -> doNothing(uri)));
 				stack.push(command);
+				testDocument.setLastUseTime(System.nanoTime());
+				minHeap.reHeapify(testDocument);
 				return testDocument.getDocumentTextHashCode();
 			}
 			if (testDocument != null && testDocument.getDocumentTextHashCode() != txthash)//same uri
@@ -118,9 +155,7 @@ public class DocumentStoreImpl implements DocumentStore{
 				return sameUriPDF(uri,stringText,txthash,inputByte);
 			}
 			DocumentImpl newDocument = new DocumentImpl(uri, stringText, txthash, inputByte);
-			hashTable.put(uri, newDocument);
-			lambdaExpression(uri);
-			inputKey(stringText, newDocument);//add the keys to the trie
+			insertionDoc(newDocument, uri, stringText);
 			thisDoc.close();
 			return 0;
 		}
@@ -131,11 +166,15 @@ public class DocumentStoreImpl implements DocumentStore{
 	{
 		Document valueToReturn = (Document)hashTable.get(uri);
 		deletedHashTable.put(uri,hashTable.get(uri));//add it to a deleted hashtable
-		boolean test = deleteUndoPut(uri);
+		deleteUndoPut(uri);
 		DocumentImpl newDocument = new DocumentImpl(uri, stringText, txthash, inputByte);
 		hashTable.put(uri, newDocument);
 		inputKey(stringText,newDocument);//put the key into the trie
+		newDocument.setLastUseTime(System.nanoTime());//set the time of the document
+		minHeap.insert(newDocument);
+		CurrentBytes += getBytes(newDocument);
 		lambdaExpressionAlreadyExisting(uri);
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		return valueToReturn.getDocumentTextHashCode();
 	}
 	private int txtHelper(byte[] inputByte,int txthash,URI uri)
@@ -147,6 +186,8 @@ public class DocumentStoreImpl implements DocumentStore{
 		{
 			GenericCommand command = new GenericCommand(uri, ((j) -> doNothing(uri)));
 			stack.push(command);
+			testDocument.setLastUseTime(System.nanoTime());//set the time of the document
+			minHeap.reHeapify(testDocument);
 			return testDocument.getDocumentTextHashCode();
 		}
 		if (testDocument != null && testDocument.getDocumentTextHashCode() != txthash)//same uri
@@ -154,11 +195,21 @@ public class DocumentStoreImpl implements DocumentStore{
 			return sameUriDOC(uri, string, txthash);
 		}
 		DocumentImpl newDocument = new DocumentImpl(uri,string,txthash);
-		hashTable.put(uri, newDocument);
-		inputKey(string, newDocument);
-		lambdaExpression(uri);
+		insertionDoc(newDocument, uri, string);
 		return 0;
 	}
+	private void insertionDoc(Document newDocument, URI uri, String string)
+	{
+		hashTable.put(uri, newDocument);
+		inputKey(string, newDocument);
+		CurrentDocCount++;
+		CurrentBytes += getBytes(newDocument);
+		newDocument.setLastUseTime(System.nanoTime());//set the time of the document
+		minHeap.insert(newDocument);
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
+		lambdaExpression(uri);
+	}
+
 	private int sameUriDOC(URI uri, String string, int txthash)
 	{
 		Document valueToReturn = (Document)hashTable.get(uri);
@@ -167,7 +218,10 @@ public class DocumentStoreImpl implements DocumentStore{
 		DocumentImpl newDocument = new DocumentImpl(uri, string, txthash);
 		hashTable.put(uri, newDocument);
 		inputKey(string, newDocument);
+		minHeap.insert(newDocument);
+		CurrentBytes += getBytes(newDocument);
 		lambdaExpressionAlreadyExisting(uri);
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		return valueToReturn.getDocumentTextHashCode();
 	}
 	private void lambdaExpression(URI uri)
@@ -185,22 +239,51 @@ public class DocumentStoreImpl implements DocumentStore{
 		Document doc = deletedHashTable.get(k);
 		hashTable.put(k,doc);
 		inputKey(doc.getDocumentAsTxt(), doc);
+		doc.setLastUseTime(System.nanoTime());
+		minHeap.insert(doc);
+		CurrentDocCount++;
+		CurrentBytes += getBytes(doc);
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		deletedHashTable.put(k,null);//delete the old doc from the hashtable that was storing it
 		return true;
 	}
-	private boolean deleteUndoPut(URI uri)
+	private boolean deleteHeapWithoutReheapify(URI uri)
 	{
-
 		if (hashTable.get(uri) != null)
 		{
 			Document doc = hashTable.get(uri);
+			CurrentBytes -= getBytes(doc);
+			CurrentDocCount--;
 			deleteInputKey(doc.getDocumentAsTxt(), doc);
-			hashTable.put(uri,null);//delete the old value
+			hashTable.put(uri, null);//delete the old value
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+
+	private boolean deleteUndoPut(URI uri)
+	{
+		if (hashTable.get(uri) != null)
+		{
+			Document doc = hashTable.get(uri);
+			CurrentBytes -= getBytes(doc);
+			CurrentDocCount--;
+			deleteInputKey(doc.getDocumentAsTxt(), doc);
+			hashTable.put(uri,null);//delete the old value
+			removeDocHeap(doc);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	private void removeDocHeap(Document doc)
+	{
+		doc.setLastUseTime(Long.MIN_VALUE);
+		minHeap.reHeapify(doc);
+		minHeap.removeMin();
 	}
 	private boolean deleteUndoPutAlreadyExisting(URI uri)
 	{
@@ -208,11 +291,16 @@ public class DocumentStoreImpl implements DocumentStore{
 		{
 			Document doc1 = hashTable.get(uri);
 			deleteInputKey(doc1.getDocumentAsTxt(), doc1);
+			CurrentBytes -= getBytes(doc1);//delete the old bytes
 			hashTable.put(uri,null);//delete the old value
 			Document doc = deletedHashTable.get(uri);
 			hashTable.put(uri,doc);//put the new one back in
+			CurrentBytes += getBytes(doc1);//put the new bytes in
 			inputKey(doc.getDocumentAsTxt(),doc);
+			//doc.setLastUseTime(System.nanoTime());
+			minHeap.insert(doc);
 			deletedHashTable.put(uri,null);
+			while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 			return true;
 		}
 		else {
@@ -220,20 +308,26 @@ public class DocumentStoreImpl implements DocumentStore{
 		}
 	}
 	public byte[] getDocumentAsPdf(URI uri) {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		Document document = (Document) hashTable.get(uri);
 		if (document == null)//this is if no document exists
 		{
 			return null;
 		}
+		document.setLastUseTime(System.nanoTime());
+		minHeap.reHeapify(document);
 		return document.getDocumentAsPdf();
 	}
 
 	public String getDocumentAsTxt(URI uri) {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		Document document = (Document) hashTable.get(uri);
 		if (document == null)//this is if no document exists
 		{
 			return null;
 		}
+		document.setLastUseTime(System.nanoTime());
+		minHeap.reHeapify(document);
 		return document.getDocumentAsTxt().trim();
 	}
 	public boolean deleteDocument(URI uri)
@@ -246,6 +340,9 @@ public class DocumentStoreImpl implements DocumentStore{
 			hashTable.put(uri,null);//delete the old value
 			GenericCommand command = new GenericCommand(uri, (k) -> deleteUndoCommand(uri));
 			stack.push(command);
+			removeDocHeap(doc);
+			CurrentDocCount--;
+			CurrentBytes -= getBytes(doc);
 			return true;
 		}
 		else {
@@ -257,6 +354,7 @@ public class DocumentStoreImpl implements DocumentStore{
 
 	public void undo() throws IllegalStateException
 	{
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		if (stack.size() == 0)
 		{
 			throw new IllegalStateException("There are no undo's to execute");
@@ -266,9 +364,13 @@ public class DocumentStoreImpl implements DocumentStore{
 		{
 			((CommandSet) commandUndo).undoAll();
 		}
-		commandUndo.undo();
+		if (commandUndo instanceof GenericCommand)
+		{
+			commandUndo.undo();
+		}
 	}
 	public void undo(URI uri) throws IllegalStateException {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		if (stack.size() == 0) {throw new IllegalStateException("There are no undo's to execute");}
 		StackImpl<Undoable> stackSwitch = new StackImpl<>();
 		boolean tester = true;
@@ -276,41 +378,41 @@ public class DocumentStoreImpl implements DocumentStore{
 			Undoable command = stack.peek();
 			if (command instanceof CommandSet)
 			{
-				if (((CommandSet) command).containsTarget(uri)) {
-					CommandUndo(command, uri);
+				if (((CommandSet) command).containsTarget(uri))
+				{
+					((CommandSet) command).undo(uri);
 					tester = false;
 					break;
 				}
-				break;
 			}
-			if ((command.hashCode()) == (uri.hashCode())) {
+			if (command instanceof GenericCommand && (command.hashCode()) == (uri.hashCode())) {
 				Undoable commandUri = stack.pop();
 				commandUri.undo();
 				tester = false;
 				break;
 			}
-			stackSwitch.push(command);
-			stack.pop();
+			stackSwitch.push(stack.pop());
 		}
 		while (stackSwitch.size() != 0) {
-			Undoable reAddTOStack= stackSwitch.pop();
-			stack.push(reAddTOStack);
+			stack.push(stackSwitch.pop());
 		}
 		if (tester == true)
 		{ throw new IllegalStateException("The inputted uri was not found in the command stack"); }
 	}
 	private void CommandUndo(Undoable command, URI uri)
 	{
-		((CommandSet) command).undo(uri);
+
 		if (((CommandSet) command).size() == 0)
 		{
 			stack.pop();
 		}
 	}
 	public List<String> search(String keyword) {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		List<String> strings = new ArrayList<>();
 		if (keyword == null){return strings;}
 		List<Document> searchDoc = documentTrie.getAllSorted(editInputKey(keyword),new JonathanComparator(keyword));
+		long currentTime = System.nanoTime();
 		if (searchDoc == null)
 		{
 			return strings;
@@ -319,22 +421,29 @@ public class DocumentStoreImpl implements DocumentStore{
 		for (Document doc: searchDoc)
 		{
 			myList.add(doc.getDocumentAsTxt());
+			doc.setLastUseTime(currentTime);
+			minHeap.reHeapify(doc);
 		}
 		return myList;
 	}
 	public List<byte[]> searchPDFs(String keyword) {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		ArrayList<byte[]> byteList = new ArrayList<>();
 		if (keyword == null){return byteList;}
 		List<Document> jonathan = documentTrie.getAllSorted(editInputKey(keyword),new JonathanComparator(keyword));
 		if (jonathan == null) { return byteList;}
 		List<byte[]> byteListReturn = new ArrayList<>();
+		long currentTime = System.nanoTime();
 		for (Document doc: jonathan)
 		{
 			byteListReturn.add(doc.getDocumentAsPdf());
+			doc.setLastUseTime(currentTime);
+			minHeap.reHeapify(doc);
 		}
 		return byteListReturn;
 	}
 	public List<String> searchByPrefix(String prefix) {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		List<String> empty = new ArrayList<>();
 		if (prefix == null){return empty;}
 		List<Document> jonathan = documentTrie.getAllWithPrefixSorted(editInputKey(prefix),new JonathanComparatorPrefix(prefix));
@@ -343,13 +452,17 @@ public class DocumentStoreImpl implements DocumentStore{
 			return empty;
 		}
 		List<String> myList = new ArrayList<>();
+		long currentTime = System.nanoTime();
 		for (Document doc: jonathan)
 		{
 			myList.add(doc.getDocumentAsTxt());
+			doc.setLastUseTime(currentTime);
+			minHeap.reHeapify(doc);
 		}
 		return myList;
 	}
 	public List<byte[]> searchPDFsByPrefix(String prefix) {
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		ArrayList<byte[]> byteList = new ArrayList<>();
 		if (prefix == null){return byteList;}
 		List<Document> jonathan = documentTrie.getAllWithPrefixSorted(editInputKey(prefix),new JonathanComparatorPrefix(prefix));
@@ -358,10 +471,12 @@ public class DocumentStoreImpl implements DocumentStore{
 			return byteList;
 		}
 		List<byte[]> byteListReturn = new ArrayList<>();
+		long currentTime = System.nanoTime();
 		for (Document doc: jonathan)
 		{
-			byte[] byteDoc = doc.getDocumentAsPdf();
-			byteListReturn.add(byteDoc);
+			byteListReturn.add(doc.getDocumentAsPdf());
+			doc.setLastUseTime(currentTime);
+			minHeap.reHeapify(doc);
 		}
 		return byteListReturn;
 	}
@@ -376,22 +491,22 @@ public class DocumentStoreImpl implements DocumentStore{
 			setURI.add(doc.getKey());
 		}
 		CommandSet commandSet = new CommandSet();
-		stack.push(commandSet);
 		for (Document doc: deleteAll)
 		{
 			hashTableDeleteUndoDeleteAll.put(doc.getKey(), doc);
-			commandSet.addCommand(new GenericCommand(doc.getKey(), (k)->undoDeleteAll(doc.getKey())));
+			URI uri = doc.getKey();
+			commandSet.addCommand(new GenericCommand(uri, (k)->undoDeleteAll(uri)));
 			String txt = doc.getDocumentAsTxt();
-			hashTable.put(doc.getKey(), null);
+			hashTable.put(uri, null);
+			removeDocHeap(doc);
+			CurrentBytes-=getBytes(doc);
+			CurrentDocCount--;
 			for (String str : delString(txt))
 			{
-				if (Objects.equals(str, righthere(key)))
-				{
-					break;
-				}
 				documentTrie.delete(str, doc);
 			}
 		}
+		stack.push(commandSet);
 		return setURI;
 	}
 	private String righthere(String str)
@@ -404,16 +519,22 @@ public class DocumentStoreImpl implements DocumentStore{
 	{
 		Document doc = hashTableDeleteUndoDeleteAll.get(uri);
 		inputKey(doc.getDocumentAsTxt(), doc);
+		doc.setLastUseTime(System.nanoTime());
+		minHeap.insert(doc);
 		hashTable.put(doc.getKey(),doc);
 		hashTableDeleteUndoDeleteAll.put(doc.getKey(),null);
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		return true;
 	}
 	private boolean undoDeletePrefix(URI uri)
 	{
 		Document doc = hashTableDeleteUndoDeletePrefix.get(uri);
 		inputKey(doc.getDocumentAsTxt(), doc);
+		doc.setLastUseTime(System.nanoTime());
+		minHeap.insert(doc);
 		hashTable.put(doc.getKey(),doc);
 		hashTableDeleteUndoDeletePrefix.put(doc.getKey(),null);
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 		return true;
 	}
 	private List<String> delString(String str)
@@ -445,34 +566,41 @@ public class DocumentStoreImpl implements DocumentStore{
 			setURI.add(doc.getKey());
 		}
 		CommandSet commandSet = new CommandSet();
-		stack.push(commandSet);
 		for (Document doc: deleteAllPrefix)
 		{
 			hashTableDeleteUndoDeletePrefix.put(doc.getKey(), doc);
 			commandSet.addCommand(new GenericCommand(doc.getKey(), (k)->undoDeletePrefix(doc.getKey())));
 			String txt = doc.getDocumentAsTxt();
 			hashTable.put(doc.getKey(), null);
+			removeDocHeap(doc);
+			CurrentBytes-=getBytes(doc);
+			CurrentDocCount--;
 			for (String str : delString(txt))
 			{
-				if (documentTrie.delete(str, doc)== null)
-				{
-					break;
-				}
+				documentTrie.delete(str, doc);
 			}
 		}
+		stack.push(commandSet);
 		return setURI;
 	}
 
 	@Override
-	public void setMaxDocumentCount(int limit) {
-
+	public void setMaxDocumentCount(int limit)
+	{
+		this.MaxDocumentCount = limit;
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 	}
 
 	@Override
-	public void setMaxDocumentBytes(int limit) {
-
+	public void setMaxDocumentBytes(int limit)
+	{
+		this.MaxDocumentBytes = limit;
+		while (CurrentDocCount > MaxDocumentCount || CurrentBytes > MaxDocumentBytes){removeTooManyDoc();}
 	}
-
+	private int getBytes(Document doc)
+	{
+		return doc.getDocumentAsTxt().getBytes().length + doc.getDocumentAsPdf().length;
+	}
 
 	protected Document getDocument(URI uri){
 		Document document = hashTable.get(uri);
@@ -643,7 +771,17 @@ public class DocumentStoreImpl implements DocumentStore{
 			}
 		}
 	}
-
-
-
+	//allows me to delete a single doc from the commandset, based on the undo
+	private class IteratorRemove<Target> extends CommandSet<Target>
+	{
+		CommandSet commandSet;
+		IteratorRemove(CommandSet commandSet)
+		{
+			this.commandSet = commandSet;
+		}
+		private void removeDoc(Target uri)
+		{
+			super.deleteCommandFromSet(uri);
+		}
+	}
 }

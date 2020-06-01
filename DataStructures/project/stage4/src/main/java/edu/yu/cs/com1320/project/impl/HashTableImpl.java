@@ -2,13 +2,6 @@ package edu.yu.cs.com1320.project.impl;
 
 import edu.yu.cs.com1320.project.HashTable;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-
 public class HashTableImpl<Key, Value> implements HashTable <Key,Value> {
 	private LinkedValues[] array = new LinkedValues[5];
 	private int arraySize = 0;
@@ -238,11 +231,6 @@ public class HashTableImpl<Key, Value> implements HashTable <Key,Value> {
 			}
 			return size;
 		}
-
-	}
-
-	public static void main(String[] args) throws URISyntaxException {
-		String query =
 
 	}
 }

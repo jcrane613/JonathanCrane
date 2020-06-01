@@ -1,6 +1,6 @@
-package edu.yu.cs.com1320.project.stage4.impl;
+package edu.yu.cs.com1320.project.stage5.impl;
 
-import edu.yu.cs.com1320.project.stage4.Document;
+import edu.yu.cs.com1320.project.stage5.Document;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class DocumentImpl implements Document {
@@ -132,6 +133,16 @@ public class DocumentImpl implements Document {
 	}
 
 	@Override
+	public Map<String, Integer> getWordMap() {
+		return hashMap;
+	}
+
+	@Override
+	public void setWordMap(Map<String, Integer> wordMap) {
+		this.hashMap = (HashMap<String, Integer>) wordMap;
+	}
+
+	@Override
 	public int compareTo(Document o) {
 		if (getLastUseTime() == o.getLastUseTime())
 			return 0;
@@ -140,3 +151,4 @@ public class DocumentImpl implements Document {
 		else return -1;
 	}
 }
+

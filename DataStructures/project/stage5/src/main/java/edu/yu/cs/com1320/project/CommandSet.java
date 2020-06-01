@@ -19,18 +19,6 @@ public class CommandSet<Target> extends AbstractSet<GenericCommand<Target>> impl
     public boolean containsTarget(Target c) {
         return this.genericCommands.contains(new GenericCommand<>(c,null));
     }
-    protected void deleteCommandFromSet(Target c)
-    {
-        if (containsTarget(c)) {
-            Object[] commands = this.genericCommands.toArray();
-            for (int i = 0; i < commands.length; i++) {
-                GenericCommand<Target> cmd = (GenericCommand<Target>) commands[i];
-                if (cmd.getTarget().equals(c)) {
-                    this.genericCommands.remove(cmd);
-                }
-            }
-        }
-    }
 
     /**
      * Add a command to this command set.
@@ -44,6 +32,18 @@ public class CommandSet<Target> extends AbstractSet<GenericCommand<Target>> impl
             throw new IllegalArgumentException("this CommandSet already has a command for " + genericCommand.getTarget().toString());
         }
         this.genericCommands.add(genericCommand);
+    }
+    protected void deleteCommandFromSet(Target c)
+    {
+        if (containsTarget(c)) {
+            Object[] commands = this.genericCommands.toArray();
+            for (int i = 0; i < commands.length; i++) {
+                GenericCommand<Target> cmd = (GenericCommand<Target>) commands[i];
+                if (cmd.getTarget().equals(c)) {
+                    this.genericCommands.remove(cmd);
+                }
+            }
+        }
     }
 
     /**

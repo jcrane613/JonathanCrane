@@ -37,7 +37,7 @@ public interface Document extends Comparable<Document>
      * (for stage 4 of project)
      */
     long getLastUseTime();
-    void setLastUseTime(long timeInMilliseconds);
+    void setLastUseTime(long timeInNanoseconds);
 
     /**
      * @return a copy of the word to count map so it can be serialized

@@ -11,8 +11,8 @@ import java.util.NoSuchElementException;
 public abstract class MinHeap<E extends Comparable>
 {
     protected E[] elements;
-    protected int count;
-    protected Map<E,Integer> elementsToArrayIndex; //used to store the index in the elements array
+    protected int count=0;
+    protected Map<E,Integer> elementsToArrayIndex;
 
     public abstract void reHeapify(E element);
     protected abstract int getArrayIndex(E element);
@@ -21,7 +21,7 @@ public abstract class MinHeap<E extends Comparable>
 
     protected  boolean isEmpty()
     {
-        return this.count == -1;
+        return this.count == 0;
     }
     /**
      * is elements[i] > elements[j]?

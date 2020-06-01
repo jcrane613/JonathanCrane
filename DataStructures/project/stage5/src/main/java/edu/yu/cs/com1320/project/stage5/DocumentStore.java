@@ -70,35 +70,30 @@ public interface DocumentStore
      * Retrieve all documents whose text starts with the given prefix
      * Documents are returned in sorted, descending order, sorted by the number of times the prefix appears in the document.
      * Search is CASE INSENSITIVE.
-     * @param prefix
+     * @param keywordPrefix
      * @return a List of the matches. If there are no matches, return an empty list.
      */
-    List<String> searchByPrefix(String prefix);
+    List<String> searchByPrefix(String keywordPrefix);
 
     /**
      * same logic as searchByPrefix, but returns the docs as PDFs instead of as Strings
      */
-    List<byte[]> searchPDFsByPrefix(String prefix);
+    List<byte[]> searchPDFsByPrefix(String keywordPrefix);
 
     /**
-     * delete ALL exact matches for the given key
-     * @param key
+     * Completely remove any trace of any document which contains the given keyword
+     * @param keyword
      * @return a Set of URIs of the documents that were deleted.
      */
-    Set<URI> deleteAll(String key);
+    Set<URI> deleteAll(String keyword);
 
     /**
-     * Delete all matches that contain a String with the given prefix.
+     * Completely remove any trace of any document which contains a word that has the given prefix
      * Search is CASE INSENSITIVE.
-     * @param prefix
+     * @param keywordPrefix
      * @return a Set of URIs of the documents that were deleted.
      */
-    Set<URI> deleteAllWithPrefix(String prefix);
-    /**
-     * return the last time this document was used, via put/get or via a search result
-     */
-    long getLastUseTime();
-    void setLastUseTime(long timeInMilliseconds);
+    Set<URI> deleteAllWithPrefix(String keywordPrefix);
     /**
      * set maximum number of documents that may be stored
      * @param limit
@@ -106,7 +101,7 @@ public interface DocumentStore
     void setMaxDocumentCount(int limit);
 
     /**
-     * set maximum number of bytes of memory that may be used by all the compressed documents in memory combined
+     * set maximum number of bytes of memory that may be used by all the documents in memory combined
      * @param limit
      */
     void setMaxDocumentBytes(int limit);

@@ -33,7 +33,7 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E> {
 		E[] newElements = (E[]) new Comparable[elements.length*2];
 		for (int j = 1; j <= count; j++)
 		{
-			 newElements[j] = elements[j];
+			newElements[j] = elements[j];
 		}
 		elements = newElements;
 	}
@@ -44,9 +44,7 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E> {
 	}
 
 	@Override
-	protected boolean isGreater(int i, int j) {
-		return super.isGreater(i, j);
-	}
+	protected boolean isGreater(int i, int j) { return super.isGreater(i,j); }
 
 	@Override
 	protected void swap(int i, int j) {
@@ -89,14 +87,14 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E> {
 		{
 			throw new NoSuchElementException("Heap is empty");
 		}
-		E min = (E) this.elements[1];
+		E min = this.elements[1];
 		//swap root with last, decrement count
 		this.swap(1, this.count--);
 		//move new root down as needed
 		this.downHeap(1);
 		this.elements[this.count + 1] = null; //null it to prepare for GC
 		elementsToArrayIndex.remove(min);
-		return (E) min;
+		return (E)(min);
 	}
 	/* code from sedekwick to check if it is a minheap is ordered as needed to be
 	// is pq[1..n] a min heap?
@@ -123,3 +121,4 @@ public class MinHeapImpl<E extends Comparable> extends MinHeap<E> {
 
 	 */
 }
+

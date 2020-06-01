@@ -36,5 +36,5 @@ public interface Document extends Comparable<Document>
      * (for stage 4 of project)
      */
     long getLastUseTime();
-    void setLastUseTime(long timeInMilliseconds);
+    void setLastUseTime(long timeInNanoseconds);
 }

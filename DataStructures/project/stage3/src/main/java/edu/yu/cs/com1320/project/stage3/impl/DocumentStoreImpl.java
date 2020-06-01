@@ -371,10 +371,6 @@ public class DocumentStoreImpl implements DocumentStore
 			hashTable.put(doc.getKey(), null);
 			for (String str : delString(txt))
 			{
-				if (Objects.equals(str, righthere(key)))
-				{
-					break;
-				}
 				documentTrie.delete(str, doc);
 			}
 		}
@@ -440,10 +436,7 @@ public class DocumentStoreImpl implements DocumentStore
 			hashTable.put(doc.getKey(), null);
 			for (String str : delString(txt))
 			{
-				if (documentTrie.delete(str, doc)== null)
-				{
-					break;
-				}
+				documentTrie.delete(str, doc);
 			}
 		}
 		return setURI;

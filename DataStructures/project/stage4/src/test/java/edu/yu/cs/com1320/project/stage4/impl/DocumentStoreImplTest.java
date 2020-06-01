@@ -1,11 +1,6 @@
-package edu.yu.cs.com1320.project.stage3.impl;
+package edu.yu.cs.com1320.project.stage4.impl;
 
-import edu.yu.cs.com1320.project.Trie;
-import edu.yu.cs.com1320.project.impl.TrieImpl;
-import edu.yu.cs.com1320.project.impl.TrieImplTest;
-import edu.yu.cs.com1320.project.impl.Utils;
-import edu.yu.cs.com1320.project.stage3.Document;
-import edu.yu.cs.com1320.project.stage3.DocumentStore;
+import edu.yu.cs.com1320.project.stage4.DocumentStore;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -15,7 +10,6 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.print.Doc;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -50,6 +44,83 @@ public class DocumentStoreImplTest {
 	private String pdfTxt3;
 
 	@Before
+	public void iyynit() throws Exception {
+		//init possible values for doc1
+		this.uri5 = new URI("http://edu.yu.cs/com1320/project/doc1");
+		this.txt5 = "Hey how are 637 You-e doing today, you Typical you this is a grea surprise you howdaa";
+		this.pdfTxt5 = "There hope is haa hope";
+		this.pdfData5 = textToPdfData(this.pdfTxt5);
+		//init possible values for doc4
+		this.uri4 = new URI("https://github.com/Yeshiva-University-CS/DataStructuresProjectSpring2020");
+		this.txt4 = "A ifferent test dung dickle doob dors ding test dum you Typical";
+		this.pdfTxt4 = "There hope is haa hope that hopeone will hagrow firstonenenenen";
+		this.pdfData4 = textToPdfData(this.pdfTxt4);
+
+		//init possible values for doc2
+		this.uri6 = new URI("http://edu.yu.cs/com1320/project/doc2");
+		this.txt6 = "daces dacha dadas daddy dados test daffs daffy you dagga Typical";
+		this.pdfTxt6 = "PDF hacontent hope for hope doc2: PhaDF hope format was hope opened in 2008.";
+		this.pdfData6 = textToPdfData(this.pdfTxt6);
+
+		//init possible values for doc3
+		this.uri3 = new URI("http://youtube.com");
+		this.txt3 = "Typical Doc for a typical doc this is thee you most three two twere.";
+		this.pdfTxt3 = "I hape I hope am able to fix some of my grades, I want to do the best";
+		this.pdfData3 = textToPdfData(this.pdfTxt3);
+	}
+
+	@Test
+	public void setMaxCountDeletesPreviousDoc()
+	{
+		DocumentStore store = new DocumentStoreImpl();
+		store.putDocument(new ByteArrayInputStream(this.txt5.getBytes()), this.uri5, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt6.getBytes()), this.uri6, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt4.getBytes()), this.uri4, DocumentStore.DocumentFormat.TXT);
+		store.setMaxDocumentCount(2);
+		store.putDocument(new ByteArrayInputStream(this.txt3.getBytes()), this.uri3, DocumentStore.DocumentFormat.TXT);
+		store.undo();
+		List<String> text = new ArrayList<>();
+		text.add(this.txt4);
+		assertEquals(text, store.search("you"));
+
+	}
+	@Test
+	public void newTest()
+	{
+		DocumentStore store = new DocumentStoreImpl();
+		store.putDocument(new ByteArrayInputStream(this.txt5.getBytes()), this.uri5, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt6.getBytes()), this.uri6, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt4.getBytes()), this.uri4, DocumentStore.DocumentFormat.TXT);
+		store.undo();
+		List<String> text = new ArrayList<>();
+		text.add(this.txt5);
+		text.add(this.txt6);
+		assertEquals(text, store.search("you"));
+		store.putDocument(new ByteArrayInputStream(this.txt3.getBytes()), this.uri3, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt4.getBytes()), this.uri4, DocumentStore.DocumentFormat.TXT);
+		store.deleteAll("you");
+		store.undo(uri6);
+		List<String> text2 = new ArrayList<>();
+		text2.add(this.txt6);
+		assertEquals(text2, store.search("you"));
+		store.setMaxDocumentBytes(10000);
+		store.undo();
+
+	}
+	@Test
+	public void another()
+	{
+		DocumentStore store = new DocumentStoreImpl();
+		store.putDocument(new ByteArrayInputStream(this.txt5.getBytes()), this.uri5, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt6.getBytes()), this.uri6, DocumentStore.DocumentFormat.TXT);
+		store.putDocument(new ByteArrayInputStream(this.txt4.getBytes()), this.uri4, DocumentStore.DocumentFormat.TXT);
+		store.deleteAll("you");
+		store.undo(uri6);
+
+	}
+
+
+	@Before
 	public void init() throws Exception {
 		//init possible values for doc1
 		this.uri5 = new URI("http://edu.yu.cs/com1320/project/doc1");
@@ -58,19 +129,19 @@ public class DocumentStoreImplTest {
 		this.pdfData5 = textToPdfData(this.pdfTxt5);
 		//init possible values for doc4
 		this.uri4 = new URI("https://github.com/Yeshiva-University-CS/DataStructuresProjectSpring2020");
-		this.txt4 = "A ifferent test dung dickle doob dors ding test dum Typical";
+		this.txt4 = "A ifferent test dung dickle you doob dors ding test dum Typical";
 		this.pdfTxt4 = "There hope is haa hope that hopeone will hagrow firstonenenenen";
 		this.pdfData4 = textToPdfData(this.pdfTxt4);
 
 		//init possible values for doc2
 		this.uri6 = new URI("http://edu.yu.cs/com1320/project/doc2");
-		this.txt6 = "daces dacha dadas daddy dados test daffs daffy dagga Typical";
+		this.txt6 = "daces dacha dadas daddy you dados test daffs daffy dagga Typical";
 		this.pdfTxt6 = "PDF hacontent hope for hope doc2: PhaDF hope format was hope opened in 2008.";
 		this.pdfData6 = textToPdfData(this.pdfTxt6);
 
 		//init possible values for doc3
 		this.uri3 = new URI("http://youtube.com");
-		this.txt3 = "Typical Doc for a typical doc this is thee most three two twere.";
+		this.txt3 = "Typical Doc for a typical you doc this is thee most three two twere.";
 		this.pdfTxt3 = "I hape I hope am able to fix some of my grades, I want to do the best";
 		this.pdfData3 = textToPdfData(this.pdfTxt3);
 	}
@@ -217,7 +288,7 @@ public class DocumentStoreImplTest {
 		@SuppressWarnings("rawtypes")
 		Class[] classes = DocumentStoreImpl.class.getInterfaces();
 		assertTrue(classes.length == 1);
-		assertTrue(classes[0].getName().equals("edu.yu.cs.com1320.project.stage3.DocumentStore"));
+		assertTrue(classes[0].getName().equals("edu.yu.cs.com1320.project.stage4.DocumentStore"));
 	}
 
 	@Test
@@ -229,7 +300,7 @@ public class DocumentStoreImplTest {
 				publicMethodCount++;
 			}
 		}
-		assertTrue(publicMethodCount == 12);
+		assertTrue(publicMethodCount == 14);
 	}
 
 	@Test
@@ -360,13 +431,13 @@ public class DocumentStoreImplTest {
 		this.uri1 = new URI("http://edu.yu.cs/com1320/project/doc1");
 		this.txt1 = "This is the text of doc1, in plain text. No fancy file format - just plain old String";
 		this.pdfTxt1 = "This is some PDF text for doc1, hat tip to Adobe.";
-		this.pdfData1 = Utils.textToPdfData(this.pdfTxt1);
+		this.pdfData1 = UtilsTest.textToPdfData(this.pdfTxt1);
 
 		//init possible values for doc2
 		this.uri2 = new URI("http://edu.yu.cs/com1320/project/doc2");
 		this.txt2 = "Text for doc2. A plain old String.";
 		this.pdfTxt2 = "PDF content for doc2: PDF format was opened in 2008.";
-		this.pdfData2 = Utils.textToPdfData(this.pdfTxt2);
+		this.pdfData2 = UtilsTest.textToPdfData(this.pdfTxt2);
 	}
 
 	@Test
@@ -405,13 +476,13 @@ public class DocumentStoreImplTest {
 		int returned = store.putDocument(new ByteArrayInputStream(this.pdfData1),this.uri1, DocumentStore.DocumentFormat.PDF);
 		//TODO allowing for student following old API comment. To be changed for stage 2 to insist on following new comment.
 		assertTrue(returned == 0 || returned == this.pdfTxt1.hashCode());
-		assertEquals("failed to return correct pdf text",this.pdfTxt1,Utils.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
+		assertEquals("failed to return correct pdf text",this.pdfTxt1,UtilsTest.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
 
 		//put the second version, testing both return value of put and see if it gets the correct text
 		returned = store.putDocument(new ByteArrayInputStream(this.pdfData2),this.uri1, DocumentStore.DocumentFormat.PDF);
 		//TODO allowing for student following old API comment. To be changed for stage 2 to insist on following new comment.
 		assertTrue("should return hashcode of old text",this.pdfTxt1.hashCode() == returned || this.pdfTxt2.hashCode() == returned);
-		assertEquals("failed to return correct pdf text", this.pdfTxt2,Utils.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
+		assertEquals("failed to return correct pdf text", this.pdfTxt2,UtilsTest.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
 	}
 
 	@Test
@@ -436,7 +507,7 @@ public class DocumentStoreImplTest {
 		int returned = store.putDocument(new ByteArrayInputStream(this.txt1.getBytes()),this.uri1, DocumentStore.DocumentFormat.TXT);
 		//TODO allowing for student following old API comment. To be changed for stage 2 to insist on following new comment.
 		assertTrue(returned == 0 || returned == this.txt1.hashCode());
-		assertEquals("failed to return correct pdf text",this.txt1,Utils.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
+		assertEquals("failed to return correct pdf text",this.txt1,UtilsTest.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
 	}
 
 	@Test
@@ -454,7 +525,7 @@ public class DocumentStoreImplTest {
 		int returned = store.putDocument(new ByteArrayInputStream(this.pdfData1),this.uri1, DocumentStore.DocumentFormat.PDF);
 		//TODO allowing for student following old API comment. To be changed for stage 2 to insist on following new comment.
 		assertTrue(returned == 0 || returned == this.pdfTxt1.hashCode());
-		assertEquals("failed to return correct pdf text",this.pdfTxt1,Utils.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
+		assertEquals("failed to return correct pdf text",this.pdfTxt1,UtilsTest.pdfDataToText(store.getDocumentAsPdf(this.uri1)));
 	}
 
 	@Test
@@ -486,4 +557,3 @@ public class DocumentStoreImplTest {
 		assertEquals("failed to return false when trying to delete that which was never there to begin with",false,store.deleteDocument(this.uri2));
 	}
 }
-
